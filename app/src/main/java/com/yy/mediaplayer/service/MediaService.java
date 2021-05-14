@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.media.MediaBrowserCompat;
 import android.support.v4.media.session.MediaSessionCompat;
-import android.support.v4.media.session.PlaybackStateCompat;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -73,7 +72,6 @@ public class MediaService extends MediaBrowserServiceCompat {
         return super.onStartCommand(intent, flags, startId);
     }
 
-
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -82,12 +80,4 @@ public class MediaService extends MediaBrowserServiceCompat {
         notificationManager.stopNotification();
         mediaSession.release();
     }
-
-    private final MediaSessionCompat.Callback callback = new MediaSessionCompat.Callback() {
-        @Override
-        public void onPlay() {
-            super.onPlay();
-        }
-    };
-
 }

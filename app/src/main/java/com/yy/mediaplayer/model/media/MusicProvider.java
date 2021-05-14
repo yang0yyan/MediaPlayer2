@@ -11,9 +11,6 @@ import com.yy.mediaplayer.model.MusicQueueManager;
 import com.yy.mediaplayer.notification.MediaNotificationManager;
 import com.yy.mediaplayer.room.entity.MusicInfoEntity;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class MusicProvider implements Playback.Callback {
     private final MediaMetadataCompat.Builder mediaMetadataBuilder;
     private final PlaybackStateCompat.Builder stateBuilder;
@@ -45,7 +42,6 @@ public class MusicProvider implements Playback.Callback {
     }
 
     public final MediaSessionCompat.Callback mediaSessionCallback = new MediaSessionCompat.Callback() {
-
 
 
         @Override
@@ -131,7 +127,7 @@ public class MusicProvider implements Playback.Callback {
                         PlaybackStateCompat.ACTION_PLAY_FROM_MEDIA_ID |
                         PlaybackStateCompat.ACTION_PLAY_FROM_SEARCH |
                         PlaybackStateCompat.ACTION_SKIP_TO_PREVIOUS |
-                        PlaybackStateCompat.ACTION_SKIP_TO_NEXT|
+                        PlaybackStateCompat.ACTION_SKIP_TO_NEXT |
                         PlaybackStateCompat.ACTION_SEEK_TO;
         if (mediaPlayer.status == MediaPlayerManager.Status.STARTED) {
             actions |= PlaybackStateCompat.ACTION_PAUSE;

@@ -11,7 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-
 import com.yy.mediaplayer.R;
 
 import java.util.List;
@@ -19,15 +18,14 @@ import java.util.Map;
 
 public class FileAdapter extends RecyclerView.Adapter<FileAdapter.ViewHolder> {
 
-    List<Map<String,String>> listFileInfo;
+    List<Map<String, String>> listFileInfo;
 
-    static class ViewHolder extends RecyclerView.ViewHolder{
+    static class ViewHolder extends RecyclerView.ViewHolder {
         TextView name;
         CheckBox cb;
         ConstraintLayout item;
 
-        public ViewHolder (View view)
-        {
+        public ViewHolder(View view) {
             super(view);
             name = view.findViewById(R.id.tv_file_name);
             cb = view.findViewById(R.id.cb_file_choose);
@@ -36,11 +34,11 @@ public class FileAdapter extends RecyclerView.Adapter<FileAdapter.ViewHolder> {
 
     }
 
-    public FileAdapter(List<Map<String,String>> listMusicInfo) {
+    public FileAdapter(List<Map<String, String>> listMusicInfo) {
         this.listFileInfo = listMusicInfo;
     }
 
-    public void setNewData(List<Map<String,String>> listMusicInfo){
+    public void setNewData(List<Map<String, String>> listMusicInfo) {
         this.listFileInfo = listMusicInfo;
         notifyDataSetChanged();
     }
@@ -60,19 +58,21 @@ public class FileAdapter extends RecyclerView.Adapter<FileAdapter.ViewHolder> {
         holder.cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                listFileInfo.get(position).put("check",isChecked?"1":"0");
+                listFileInfo.get(position).put("check", isChecked ? "1" : "0");
             }
         });
         holder.item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(null!=onItemClickListener)
-                    onItemClickListener.onClick(v,position);
+                if (null != onItemClickListener)
+                    onItemClickListener.onClick(v, position);
             }
         });
     }
+
     OnItemClickListener onItemClickListener;
-    public void setOnItemClick(OnItemClickListener onItemClickListener){
+
+    public void setOnItemClick(OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
     }
 
@@ -81,7 +81,7 @@ public class FileAdapter extends RecyclerView.Adapter<FileAdapter.ViewHolder> {
         return listFileInfo.size();
     }
 
-    public interface OnItemClickListener{
-        void onClick(View v,int position);
+    public interface OnItemClickListener {
+        void onClick(View v, int position);
     }
 }

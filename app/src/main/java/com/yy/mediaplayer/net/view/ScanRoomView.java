@@ -6,11 +6,11 @@ import com.yy.mediaplayer.room.entity.MusicInfoEntity;
 import java.util.List;
 
 public interface ScanRoomView extends BaseView {
-    interface view extends BaseView{
+    interface view extends BaseView {
         void onInsertSuccess(long[] ls);
     }
 
-    interface presenter{
+    interface presenter {
         void insert(List<MusicInfoEntity> infos);
     }
 }

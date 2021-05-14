@@ -16,6 +16,7 @@ public abstract class BaseFragment extends Fragment {
     public Context mContext;
     private View view;
     public boolean log = true;
+
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);

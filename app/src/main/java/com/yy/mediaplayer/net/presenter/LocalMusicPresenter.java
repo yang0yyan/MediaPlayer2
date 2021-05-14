@@ -10,6 +10,7 @@ import java.util.List;
 
 public class LocalMusicPresenter extends BasePresenter<LocalMusicView.view> implements LocalMusicView.presenter {
     MusicInfoDao dao;
+
     public LocalMusicPresenter(LocalMusicView.view baseView) {
         super(baseView);
         dao = db.musicInfoDao();

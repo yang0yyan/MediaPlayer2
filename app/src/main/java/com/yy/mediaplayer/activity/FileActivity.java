@@ -12,7 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-
 import com.yy.mediaplayer.R;
 import com.yy.mediaplayer.activity.adapter.FileAdapter;
 import com.yy.mediaplayer.base.BaseActivity;

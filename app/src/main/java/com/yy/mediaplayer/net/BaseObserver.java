@@ -128,6 +128,7 @@ public abstract class BaseObserver<T> extends DisposableObserver<BaseModel<T>> {
                 break;
         }
     }
+
     //消失写到这 有一定的延迟  对dialog显示有影响
     @Override
     public void onComplete() {
@@ -135,6 +136,8 @@ public abstract class BaseObserver<T> extends DisposableObserver<BaseModel<T>> {
             view.hideLoading();
         }*/
     }
+
     public abstract void onSuccess(BaseModel<T> o);
+
     public abstract void onError(String msg);
 }

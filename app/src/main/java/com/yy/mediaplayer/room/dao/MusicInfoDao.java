@@ -5,7 +5,6 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
-
 import com.yy.mediaplayer.room.entity.MusicInfoEntity;
 
 import java.util.List;

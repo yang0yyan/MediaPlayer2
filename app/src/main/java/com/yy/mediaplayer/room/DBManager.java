@@ -16,7 +16,7 @@ public class DBManager {
     }
 
     public static AppDatabase getDb() {
-        synchronized (DBManager.class){
+        synchronized (DBManager.class) {
             if (db == null && context != null) {
                 init(context);
             }

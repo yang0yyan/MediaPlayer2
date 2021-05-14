@@ -1,7 +1,6 @@
 package com.yy.mediaplayer.net.presenter;
 
 
-
 import com.yy.mediaplayer.net.BasePresenter;
 import com.yy.mediaplayer.net.view.ScanRoomView;
 import com.yy.mediaplayer.room.RoomBaseConsumer;

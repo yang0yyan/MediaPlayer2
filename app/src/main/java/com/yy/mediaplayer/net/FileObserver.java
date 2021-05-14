@@ -39,19 +39,23 @@ public abstract class FileObserver<T> extends DisposableObserver<T> {
      * 其他所有情况
      */
     public static final int NOT_TRUE_OVER = 1004;
+
     public FileObserver(BaseView view) {
         this.view = view;
     }
+
     @Override
     protected void onStart() {
         if (view != null) {
             view.showProgress();
         }
     }
+
     @Override
     public void onNext(T t) {
         onSuccess(t);
     }
+
     @Override
     public void onError(Throwable e) {
         if (view != null) {
@@ -84,6 +88,7 @@ public abstract class FileObserver<T> extends DisposableObserver<T> {
             }
         }
     }
+
     private void onException(int unknownError, String message) {
         switch (unknownError) {
             case CONNECT_ERROR:
@@ -106,12 +111,15 @@ public abstract class FileObserver<T> extends DisposableObserver<T> {
                 break;
         }
     }
+
     @Override
     public void onComplete() {
         if (view != null) {
             view.hideProgress();
         }
     }
+
     public abstract void onSuccess(T o);
+
     public abstract void onError(String msg);
 }

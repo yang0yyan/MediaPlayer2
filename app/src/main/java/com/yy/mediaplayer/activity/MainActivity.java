@@ -1,7 +1,6 @@
 package com.yy.mediaplayer.activity;
 
 import android.content.Intent;
-import android.support.v4.media.session.MediaControllerCompat;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,7 +21,6 @@ import com.yy.mediaplayer.activity.adapter.ViewPagerAdapter;
 import com.yy.mediaplayer.activity.fragment.MusicControlsFragment;
 import com.yy.mediaplayer.activity.fragment.MusicFragment;
 import com.yy.mediaplayer.activity.fragment.VideoFragment;
-import com.yy.mediaplayer.base.BaseMediaActivity;
 import com.yy.mediaplayer.base.BaseNetMediaActivity;
 import com.yy.mediaplayer.databinding.ActivityMainBinding;
 import com.yy.mediaplayer.net.bean.MusicBean;
@@ -81,14 +79,16 @@ public class MainActivity extends BaseNetMediaActivity<MainPresenter> implements
         actionBar.setTitle("title");
         actionBar.setSubtitle("subtitle");
     }
+
     @Override
     protected MainPresenter createRoomPresenter() {
         return new MainPresenter(this);
     }
+
     @Override
     protected void initData() {
         mPresenter.getMusicList();
-        startService(new Intent(this,MediaService.class));
+        startService(new Intent(this, MediaService.class));
     }
 
 
@@ -139,11 +139,10 @@ public class MainActivity extends BaseNetMediaActivity<MainPresenter> implements
     }
 
 
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        stopService(new Intent(this,MediaService.class));
+        stopService(new Intent(this, MediaService.class));
         binding.viewPager.clearOnPageChangeListeners();
     }
 

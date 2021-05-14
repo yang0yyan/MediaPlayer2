@@ -7,6 +7,7 @@ import com.yy.mediaplayer.utils.ToastUtil;
 
 public abstract class BaseNetActivity<P extends BasePresenter> extends BaseActivity implements BaseView {
     public P mRoomPresenter;
+
     @Override
     protected void createPresenter_() {
         mRoomPresenter = createRoomPresenter();

@@ -9,7 +9,6 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-
 import com.yy.mediaplayer.R;
 import com.yy.mediaplayer.room.entity.MusicInfoEntity;
 
@@ -19,13 +18,12 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.ViewHolder> 
 
     List<MusicInfoEntity> listMusicInfo;
 
-    static class ViewHolder extends RecyclerView.ViewHolder{
+    static class ViewHolder extends RecyclerView.ViewHolder {
         TextView title;
         TextView msg;
         ConstraintLayout cl;
 
-        public ViewHolder (View view)
-        {
+        public ViewHolder(View view) {
             super(view);
             title = view.findViewById(R.id.title);
             msg = view.findViewById(R.id.msg);
@@ -38,7 +36,7 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.ViewHolder> 
         this.listMusicInfo = listMusicInfo;
     }
 
-    public void setNewData(List<MusicInfoEntity> listMusicInfo){
+    public void setNewData(List<MusicInfoEntity> listMusicInfo) {
         this.listMusicInfo = listMusicInfo;
         notifyDataSetChanged();
     }
@@ -58,8 +56,8 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.ViewHolder> 
         holder.cl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(null!=onItemClickListener)
-                    onItemClickListener.onItemClick(v,position);
+                if (null != onItemClickListener)
+                    onItemClickListener.onItemClick(v, position);
             }
         });
     }
@@ -70,11 +68,12 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.ViewHolder> 
     }
 
     private OnItemClickListener onItemClickListener;
-    public void setOnItemClick(OnItemClickListener onItemClickListener){
+
+    public void setOnItemClick(OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
     }
 
-    public interface OnItemClickListener{
-        void onItemClick(View v,int position);
+    public interface OnItemClickListener {
+        void onItemClick(View v, int position);
     }
 }

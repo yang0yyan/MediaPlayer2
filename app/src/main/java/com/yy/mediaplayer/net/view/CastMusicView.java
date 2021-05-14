@@ -12,7 +12,7 @@ public interface CastMusicView {
     }
 
 
-    interface presenter{
+    interface presenter {
         void getMusicList();
     }
 }

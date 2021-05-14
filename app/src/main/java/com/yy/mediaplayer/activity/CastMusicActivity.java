@@ -104,7 +104,7 @@ public class CastMusicActivity extends BaseNetMediaActivity<CastMusicPresenter> 
             String path = CATALOG_URL.substring(0, slashPos + 1);
             if (!musicBean.getSource().startsWith("http")) {
                 musicInfo.setFilePath(path + musicBean.getSource());
-            }else{
+            } else {
                 musicInfo.setFilePath(musicBean.getSource());
             }
             listMusicInfo.add(musicInfo);

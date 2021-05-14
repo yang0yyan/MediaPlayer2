@@ -5,14 +5,11 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.media.AudioAttributes;
-import android.media.AudioFocusRequest;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.PowerManager;
 import android.support.v4.media.session.PlaybackStateCompat;
 
-import com.yy.mediaplayer.utils.LogHelper;
 import com.yy.mediaplayer.utils.ToastUtil;
 
 import java.io.IOException;
@@ -57,7 +54,7 @@ public final class MediaPlayerManager implements MediaPlayer.OnPreparedListener,
                 @Override
                 public void onReceive(Context context, Intent intent) {
                     if (AudioManager.ACTION_AUDIO_BECOMING_NOISY.equals(intent.getAction())) {
-                        if (status==Status.STARTED) {
+                        if (status == Status.STARTED) {
                             pause();
 //                            Intent i = new Intent(context, Med.class);
 //                            i.setAction(MusicService.ACTION_CMD);
@@ -76,7 +73,7 @@ public final class MediaPlayerManager implements MediaPlayer.OnPreparedListener,
 
 
     enum Status {
-        INIT, IDLE, END, ERROR,PREPARING,
+        INIT, IDLE, END, ERROR, PREPARING,
         PREPARED, STARTED, PAUSED, COMPLETED, STOPPED
     }
 
@@ -103,8 +100,8 @@ public final class MediaPlayerManager implements MediaPlayer.OnPreparedListener,
         status = Status.INIT;
     }
 
-    private void setAudioManager(){
-        mAudioManager = (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
+    private void setAudioManager() {
+        mAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
     }
 
     //准备
@@ -134,7 +131,7 @@ public final class MediaPlayerManager implements MediaPlayer.OnPreparedListener,
             mediaPlayer.start();
             status = Status.STARTED;
             updatePlaybackState();
-        }else if(status == Status.STOPPED){
+        } else if (status == Status.STOPPED) {
             mediaPlayer.prepareAsync();
         }
     }
@@ -145,7 +142,7 @@ public final class MediaPlayerManager implements MediaPlayer.OnPreparedListener,
             unregisterAudioNoisyReceiver();
             mediaPlayer.pause();
             status = Status.PAUSED;
-        }else if(status==Status.PREPARING){
+        } else if (status == Status.PREPARING) {
             mediaPlayer.reset();
         }
         updatePlaybackState();
@@ -184,7 +181,7 @@ public final class MediaPlayerManager implements MediaPlayer.OnPreparedListener,
 
     }
 
-    private void tryToGetAudioFocus(){
+    private void tryToGetAudioFocus() {
         int result =
                 mAudioManager.requestAudioFocus(
                         mOnAudioFocusChangeListener,
@@ -210,9 +207,9 @@ public final class MediaPlayerManager implements MediaPlayer.OnPreparedListener,
             pause();
         } else {
             if (mCurrentAudioFocusState == AUDIO_NO_FOCUS_CAN_DUCK) {
-                mediaPlayer.setVolume(VOLUME_DUCK,VOLUME_DUCK);
+                mediaPlayer.setVolume(VOLUME_DUCK, VOLUME_DUCK);
             } else {
-                mediaPlayer.setVolume(VOLUME_NORMAL,VOLUME_NORMAL);
+                mediaPlayer.setVolume(VOLUME_NORMAL, VOLUME_NORMAL);
             }
             if (mPlayOnFocusGain) {
                 start();
@@ -220,6 +217,7 @@ public final class MediaPlayerManager implements MediaPlayer.OnPreparedListener,
             }
         }
     }
+
     private void registerAudioNoisyReceiver() {
         if (!mAudioNoisyReceiverRegistered) {
             context.registerReceiver(mAudioNoisyReceiver, mAudioNoisyIntentFilter);
@@ -321,7 +319,7 @@ public final class MediaPlayerManager implements MediaPlayer.OnPreparedListener,
             case MediaPlayer.MEDIA_ERROR_TIMED_OUT:
                 //有些操作耗时太长，通常超过3-5秒。
                 break;
-            case  -2147483648:
+            case -2147483648:
                 //底层位置错误。
                 break;
         }
@@ -342,7 +340,7 @@ public final class MediaPlayerManager implements MediaPlayer.OnPreparedListener,
                             break;
                         case AudioManager.AUDIOFOCUS_LOSS_TRANSIENT:
                             mCurrentAudioFocusState = AUDIO_NO_FOCUS_NO_DUCK;
-                            mPlayOnFocusGain = mediaPlayer != null &&(status==Status.STARTED);
+                            mPlayOnFocusGain = mediaPlayer != null && (status == Status.STARTED);
                             break;
                         case AudioManager.AUDIOFOCUS_LOSS:
                             mCurrentAudioFocusState = AUDIO_NO_FOCUS_NO_DUCK;

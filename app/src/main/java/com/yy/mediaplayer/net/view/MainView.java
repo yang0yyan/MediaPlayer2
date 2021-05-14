@@ -5,14 +5,13 @@ import com.yy.mediaplayer.net.bean.MusicBean;
 
 import java.util.List;
 
-public interface MainView  {
+public interface MainView {
 
-    interface view extends BaseView{
+    interface view extends BaseView {
         void onSuccess(List<MusicBean> list);
     }
 
-
-    interface presenter{
+    interface presenter {
         void getMusicList();
     }
 }

@@ -93,7 +93,7 @@ public class MediaNotificationManager extends BroadcastReceiver {
         }
     }
 
-    public MediaNotificationManager(MediaService service)  {
+    public MediaNotificationManager(MediaService service) {
         mService = service;
         try {
             updateSessionToken();
@@ -177,8 +177,8 @@ public class MediaNotificationManager extends BroadcastReceiver {
                 .setContentIntent(createContentIntent(description))
                 .setContentTitle(description.getTitle())
                 .setContentText(description.getSubtitle())
-                .setProgress(100,50,false)
-                .setLargeIcon(BitmapFactory.decodeResource(mService.getResources(),R.drawable.bg_music));
+                .setProgress(100, 50, false)
+                .setLargeIcon(BitmapFactory.decodeResource(mService.getResources(), R.drawable.bg_music));
 
 //        if (mController != null && mController.getExtras() != null) {
 //            String castName = mController.getExtras().getString(MusicService.EXTRA_CONNECTED_CAST);
@@ -235,7 +235,7 @@ public class MediaNotificationManager extends BroadcastReceiver {
         final int icon;
         final PendingIntent intent;
         mPlaybackState.getActions();
-        if((mPlaybackState.getActions() & PlaybackStateCompat.ACTION_PLAY_PAUSE)!=0){
+        if ((mPlaybackState.getActions() & PlaybackStateCompat.ACTION_PLAY_PAUSE) != 0) {
             if (mPlaybackState.getState() == PlaybackStateCompat.STATE_PLAYING) {
                 label = mService.getString(R.string.label_pause);
                 icon = R.drawable.ic_white_pause_24;
@@ -269,7 +269,8 @@ public class MediaNotificationManager extends BroadcastReceiver {
         // Make sure that the notification can be dismissed by the user when we are not playing:
         builder.setOngoing(mPlaybackState.getState() == PlaybackStateCompat.STATE_PLAYING);
     }
-;
+
+    ;
 
     public void startNotification() {
         if (!mStarted) {
@@ -357,7 +358,6 @@ public class MediaNotificationManager extends BroadcastReceiver {
             }
         }
     };
-
 
 
     public static int getThemeColor(Context context, int attribute, int defaultColor) {

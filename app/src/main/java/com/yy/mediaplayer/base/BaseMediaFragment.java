@@ -16,16 +16,16 @@ public abstract class BaseMediaFragment extends BaseFragment {
         @Override
         public void onPlaybackStateChanged(@NonNull PlaybackStateCompat state) {
             mPlaybackState = state;
-            if(null==mPlaybackState)return;
+            if (null == mPlaybackState) return;
             BaseMediaFragment.this.onPlaybackStateChanged(state);
         }
 
         @Override
         public void onMetadataChanged(MediaMetadataCompat metadata) {
             mMediaMetadata = metadata;
-            if(null==mMediaMetadata)return;
+            if (null == mMediaMetadata) return;
             mMediaDescription = mMediaMetadata.getDescription();
-            if(null==mMediaDescription)return;
+            if (null == mMediaDescription) return;
             BaseMediaFragment.this.onMetadataChanged(metadata);
         }
     };

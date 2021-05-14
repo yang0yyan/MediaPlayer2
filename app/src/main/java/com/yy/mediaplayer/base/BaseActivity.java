@@ -30,10 +30,12 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     protected abstract View getLayoutId();
+
     protected abstract void initView();
+
     protected abstract void initData();
 
-    protected void createPresenter_(){
+    protected void createPresenter_() {
 
     }
 
@@ -53,9 +55,9 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        if(newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE){
+        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
             Toast.makeText(this, "landscape", Toast.LENGTH_SHORT).show();
-        }else if(newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
+        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
             Toast.makeText(this, "portrait", Toast.LENGTH_SHORT).show();
         }
     }

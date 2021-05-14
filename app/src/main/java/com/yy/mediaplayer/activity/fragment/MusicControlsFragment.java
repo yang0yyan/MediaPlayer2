@@ -10,8 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SeekBar;
 
-import androidx.annotation.NonNull;
-
 import com.yy.mediaplayer.R;
 import com.yy.mediaplayer.base.BaseMediaFragment;
 import com.yy.mediaplayer.databinding.FragmentMusicControlBinding;
@@ -22,9 +20,6 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
-
-import static android.view.View.INVISIBLE;
-import static android.view.View.VISIBLE;
 
 public class MusicControlsFragment extends BaseMediaFragment implements View.OnClickListener {
     private static final String TAG = LogHelper.makeLogTag(MusicControlsFragment.class);
@@ -131,6 +126,7 @@ public class MusicControlsFragment extends BaseMediaFragment implements View.OnC
             updateProgress();
         }
     };
+
     private void scheduleSeekbarUpdate() {
         stopSeekbarUpdate();
         if (!mExecutorService.isShutdown()) {
