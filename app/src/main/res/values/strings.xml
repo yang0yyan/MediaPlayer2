@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">MediaPlayer</string>
+
+    <string name="title_music">音乐</string>
+    <string name="title_video">视频</string>
+
+    <string name="label_pause">暂停</string>
+    <string name="label_play">播放</string>
+    <string name="label_previous">上一曲</string>
+    <string name="label_next">下一曲</string>
+
+    <string name="actionSet">均衡器</string>
+    <string name="addLocal">导入本地</string>
+    <string name="sort">排序</string>
+    <string name="finish">退出</string>
+    <string name="doc_sure">确定</string>
+
+    <string name="notification_channel">Music_Channel_ID</string>
+    <string name="notification_channel_description">Channel ID for Music</string>
+</resources>
