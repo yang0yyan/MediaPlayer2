@@ -310,6 +310,10 @@ public class MediaNotificationManager extends BroadcastReceiver {
         }
     }
 
+//    public void clearNotification(){
+//        mNotificationManager.cancelAll();
+//    }
+
     private PendingIntent createContentIntent(MediaDescriptionCompat description) {
         Intent openUI = new Intent(mService, MainActivity.class);
         openUI.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);

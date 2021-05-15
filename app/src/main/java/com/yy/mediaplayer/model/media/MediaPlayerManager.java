@@ -20,7 +20,7 @@ public final class MediaPlayerManager implements MediaPlayer.OnPreparedListener,
         MediaPlayer.OnCompletionListener, MediaPlayer.OnErrorListener,
         MediaPlayer.OnSeekCompleteListener, Playback {
     private Context context;
-    private MediaPlayer mediaPlayer;
+    private static MediaPlayer mediaPlayer;
     public Status status = Status.INIT;
     public PlayMode mode = PlayMode.ORDER;
     private boolean autoPlay = true;
@@ -271,7 +271,8 @@ public final class MediaPlayerManager implements MediaPlayer.OnPreparedListener,
         if (mode == PlayMode.LOOP) {
             start();
         } else {
-            updatePlaybackState();
+            callback.onPlayCompletionChanged();
+//            updatePlaybackState();
         }
     }
 
@@ -353,5 +354,7 @@ public final class MediaPlayerManager implements MediaPlayer.OnPreparedListener,
                 }
             };
 
-
+    public static MediaPlayer getMediaPlayer() {
+        return mediaPlayer;
+    }
 }

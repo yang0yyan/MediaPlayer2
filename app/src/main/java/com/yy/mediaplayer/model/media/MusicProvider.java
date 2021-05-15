@@ -88,6 +88,7 @@ public class MusicProvider implements Playback.Callback {
     };
 
     private void playMusic() {
+        if(null==musicInfo)return;
         mediaPlayer.prepareAndPlay(musicInfo.getFilePath());
         mediaSession.setActive(true);
         updateMetadata();
@@ -115,6 +116,11 @@ public class MusicProvider implements Playback.Callback {
         stateBuilder.setState(state, position, 1.0f, SystemClock.elapsedRealtime());
         mediaSession.setPlaybackState(stateBuilder.build());
         mediaSession.getController().getPlaybackState().getState();
+    }
+
+    @Override
+    public void onPlayCompletionChanged() {
+        mediaSessionCallback.onSkipToNext();
     }
 
     private void setCustomAction(PlaybackStateCompat.Builder stateBuilder) {

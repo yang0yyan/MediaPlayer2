@@ -4,6 +4,7 @@ import android.content.ComponentName;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.support.v4.media.MediaBrowserCompat;
+import android.support.v4.media.MediaDescriptionCompat;
 import android.support.v4.media.MediaMetadataCompat;
 import android.support.v4.media.session.MediaControllerCompat;
 import android.support.v4.media.session.MediaSessionCompat;
@@ -20,6 +21,27 @@ public abstract class BaseMediaActivity extends BaseActivity {
     private MediaBrowserCompat mediaBrowser;
     public MediaMetadataCompat mMediaMetadata;
     public PlaybackStateCompat mPlaybackState;
+    public MediaDescriptionCompat mMediaDescription;
+
+    private final MediaControllerCompat.Callback mMediaControllerCallback =
+            new MediaControllerCompat.Callback() {
+
+                @Override
+                public void onPlaybackStateChanged(@NonNull PlaybackStateCompat state) {
+                    mPlaybackState = state;
+                    if (null == mPlaybackState) return;
+                    BaseMediaActivity.this.onPlaybackStateChanged(state);
+                }
+
+                @Override
+                public void onMetadataChanged(MediaMetadataCompat metadata) {
+                    mMediaMetadata = metadata;
+                    if (null == mMediaMetadata) return;
+                    mMediaDescription = mMediaMetadata.getDescription();
+                    if (null == mMediaDescription) return;
+                    BaseMediaActivity.this.onMetadataChanged(metadata);
+                }
+            };
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -55,11 +77,12 @@ public abstract class BaseMediaActivity extends BaseActivity {
             mediaController = new MediaControllerCompat(this, token);
             MediaControllerCompat.setMediaController(this, mediaController);
         }
-        mediaController.registerCallback(mMediaControllerCallback);
-        mMediaMetadata = mediaController.getMetadata();
-        mPlaybackState = mediaController.getPlaybackState();
-
-        onMediaControllerConnected();
+        if (mediaController != null) {
+            mMediaControllerCallback.onMetadataChanged(mediaController.getMetadata());
+            mMediaControllerCallback.onPlaybackStateChanged(mediaController.getPlaybackState());
+            mediaController.registerCallback(mMediaControllerCallback);
+            onMediaControllerConnected();
+        }
     }
 
     protected void onMediaControllerConnected() {
@@ -80,18 +103,11 @@ public abstract class BaseMediaActivity extends BaseActivity {
         }
     };
 
-    private final MediaControllerCompat.Callback mMediaControllerCallback =
-            new MediaControllerCompat.Callback() {
-                @Override
-                public void onPlaybackStateChanged(@NonNull PlaybackStateCompat state) {
-                    LogHelper.d(TAG, "onPlaybackStateChanged: ");
-                    mPlaybackState = state;
-                }
 
-                @Override
-                public void onMetadataChanged(MediaMetadataCompat metadata) {
-                    LogHelper.d(TAG, "onMetadataChanged: ");
-                    mMediaMetadata = metadata;
-                }
-            };
+
+    protected void onMetadataChanged(MediaMetadataCompat metadata) {
+    }
+
+    protected void onPlaybackStateChanged(PlaybackStateCompat state) {
+    }
 }

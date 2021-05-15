@@ -110,8 +110,10 @@ public class MainActivity extends BaseNetMediaActivity<MainPresenter> implements
                 binding.drawerLayout.openDrawer(GravityCompat.START);
                 break;
             case R.id.addLocal:
-                Intent intent1 = new Intent(this, ScanActivity.class);
-                startActivity(intent1);
+                startActivity(new Intent(this, ScanActivity.class));
+                break;
+            case R.id.actionSet:
+                startActivity(new Intent(this, EqualizerActivity.class));
                 break;
             case R.id.finish:
                 finish();

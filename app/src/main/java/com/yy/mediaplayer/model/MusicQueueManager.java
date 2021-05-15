@@ -49,6 +49,7 @@ public class MusicQueueManager {
     }
 
     public MusicInfoEntity skipMusic(int num) {
+        if(null==listMusicInfo||listMusicInfo.size()==0)return null;
         position += num;
         if (position < 0)
             position = listMusicInfo.size() - 1;
