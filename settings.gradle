@@ -1,2 +1,3 @@
+//用于指示 Gradle 在构建应用时应将哪些模块包含在内
 include ':app'
 rootProject.name = "MediaPlayer"

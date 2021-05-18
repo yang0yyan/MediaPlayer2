@@ -22,3 +22,15 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+//配置项目全局属性
+ext {
+    compileSdkVersion = 30
+    buildToolsVersion = "30.0.2"
+
+    applicationId = "com.yy.mediaplayer"
+    minSdkVersion = 24
+    targetSdkVersion = 30
+    versionCode = 1
+    versionName = "1.0"
+}

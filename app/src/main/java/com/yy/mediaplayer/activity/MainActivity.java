@@ -1,6 +1,7 @@
 package com.yy.mediaplayer.activity;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -27,12 +28,14 @@ import com.yy.mediaplayer.net.bean.MusicBean;
 import com.yy.mediaplayer.net.presenter.MainPresenter;
 import com.yy.mediaplayer.net.view.MainView;
 import com.yy.mediaplayer.service.MediaService;
+import com.yy.mediaplayer.utils.LogHelper;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends BaseNetMediaActivity<MainPresenter> implements MainView.view {
 
+    private static final String TAG = LogHelper.makeLogTag(MusicPlayActivity.class);
 
     private ActivityMainBinding binding;
 
@@ -49,6 +52,7 @@ public class MainActivity extends BaseNetMediaActivity<MainPresenter> implements
 
     @Override
     protected void initView() {
+        LogHelper.d(TAG, "initView: ");
         setActionBar();
         listFragment.clear();
         listTitle.clear();

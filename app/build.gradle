@@ -3,15 +3,29 @@ plugins {
 }
 
 android {
-    compileSdkVersion 30
-    buildToolsVersion "30.0.2"
+    signingConfigs {
+        release {
+            storeFile file('C:\\Users\\Administrator\\Desktop\\project\\MediaPlayer\\key.jks')
+            storePassword '111111'
+            keyPassword '111111'
+            keyAlias 'key0'
+        }
+        debug {
+            storeFile file('C:\\Users\\Administrator\\Desktop\\project\\MediaPlayer\\key.jks')
+            storePassword '111111'
+            keyPassword '111111'
+            keyAlias 'key0'
+        }
+    }
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
-        applicationId "com.yy.mediaplayer"
-        minSdkVersion 24
-        targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
+        applicationId rootProject.ext.applicationId
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -31,6 +45,11 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+        debug {
+            debuggable true
+            signingConfig signingConfigs.debug
         }
     }
     compileOptions {
@@ -42,8 +61,8 @@ android {
 dependencies {
 
     implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'com.google.android.material:material:1.1.0'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'com.google.android.material:material:1.2.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
 
     //ViewModel and LiveData
     implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
