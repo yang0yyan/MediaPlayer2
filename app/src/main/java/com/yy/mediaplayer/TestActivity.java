@@ -16,13 +16,22 @@ import java.util.List;
 public class TestActivity extends BaseActivity {
 
     private ActivityTestBinding binding;
-
+    /**
+     * The dependencies block in the module-level build configuration file
+     * specifies dependencies required to build only the module itself.
+     * To learn more, go to Add build dependencies.
+     */
     @Override
     protected View getLayoutId() {
         binding = ActivityTestBinding.inflate(getLayoutInflater());
         return binding.getRoot();
     }
-
+    /**
+     * The splits block is where you can configure different APK builds that
+     * each contain only code and resources for a supported screen density or
+     * ABI. You'll also need to configure your build so that each APK has a
+     * different versionCode.
+     */
     @Override
     protected void initView() {
 

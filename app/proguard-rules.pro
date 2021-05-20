@@ -14,7 +14,9 @@
 
 # Uncomment this to preserve the line number information for
 # debugging stack traces.
-#-keepattributes SourceFile,LineNumberTable
+# 需要 LineNumberTable 属性，以消除方法内经过优化的位置之间的歧义
+# 如需获取在虚拟机或设备上的堆栈轨迹中输出的行号，则必须使用 SourceFile 属性
+-keepattributes SourceFile,LineNumberTable
 
 # If you keep the line number information, uncomment this to
 # hide the original source file name.

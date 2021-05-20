@@ -1,9 +1,12 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
+    //配置Gradle用于搜索或下载依赖项的存储库  repositories(存储库)
+    //您还可以使用本地存储库或定义自己的远程存储库
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
+    //配置Gradle用来构建项目所需的依赖项  dependencies(依赖)
     dependencies {
         classpath "com.android.tools.build:gradle:4.1.3"
 
@@ -11,11 +14,11 @@ buildscript {
         // in the individual module build.gradle files
     }
 }
-
+//配置项目中所有模块（例如第三方插件或库）使用的存储库和依赖项  allprojects (所有项目)
 allprojects {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
 }
 

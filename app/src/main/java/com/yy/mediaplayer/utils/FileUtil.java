@@ -8,6 +8,7 @@ import java.util.Map;
 
 public class FileUtil {
     public static List<Map<String, String>> getFileFromPath(String mPath) {
+        if(null==mPath||mPath.equals(""))return null;
         return getFileFromPath(new File(mPath));
     }
 

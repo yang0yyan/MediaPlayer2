@@ -1,7 +1,7 @@
 plugins {
     id 'com.android.application'
 }
-
+//配置所有特定于Android的构建选项。
 android {
     signingConfigs {
         release {
@@ -17,17 +17,31 @@ android {
             keyAlias 'key0'
         }
     }
+    //指定Gradle用来编译应用程序的Android API级别  指定可以运行App的手机系统上限
     compileSdkVersion rootProject.ext.compileSdkVersion
+    //指定Gradle用来构建应用程序的SDK生成工具，命令行实用程序和编译器的版本
     buildToolsVersion rootProject.ext.buildToolsVersion
-
+    //封装了所有构建变体的默认设置和条目
     defaultConfig {
+        //发布的程序包的唯一标识
         applicationId rootProject.ext.applicationId
+        //定义运行应用程序所需的最低API级别  指定可以运行App的手机系统下限
         minSdkVersion rootProject.ext.minSdkVersion
+        //指定用于测试应用程序的API级别
         targetSdkVersion rootProject.ext.targetSdkVersion
+        //版本号
         versionCode rootProject.ext.versionCode
+        //版本名
         versionName rootProject.ext.versionName
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        //指定测试APK的应用程序ID。
+        testApplicationId "com.test.mediaPlayer"
+        // 指定测试仪器运行程序的标准类名称。
+        testInstrumentationRunner "android.test.InstrumentationTestRunner"
+        // 如果设置为“ true”，则启用检测类开始和停止概要分析。如果设置为false（默认值），则分析在整个检测类运行的整个过程中进行。
+        testHandleProfiling true
+        // 如果设置为“ true”，则表示Android系统应将检测类作为功能测试运行。默认值为“ false”
+        testFunctionalTest true
 
         javaCompileOptions {
             annotationProcessorOptions {
@@ -41,9 +55,17 @@ android {
         }
     }
 
+
+    //配置构建类型
+    //默认情况下，构建系统定义两种构建类型：调试和发布
     buildTypes {
         release {
-            minifyEnabled false
+            debuggable false
+            // 对项目的发行版本类型启用代码收缩，混淆和优化
+            minifyEnabled true
+            // 启用资源缩减功能
+            shrinkResources true
+            // 包括与Android Gradle插件一起打包的默认ProGuard规则文件
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
         }
@@ -52,13 +74,95 @@ android {
             signingConfig signingConfigs.debug
         }
     }
+
+    //针对debug构建类型运行测试
+    testBuildType "debug"
+
+    // 封装用于运行测试的选项。
+    testOptions {
+        // 更改Gradle保存测试报告的目录。默认情况下，Gradle将测试报告保存在 path_to_your_project/module_name/build/outputs/reports/ 目录中。
+        // 'rootDir' 设置相对于当前项目的根目录的路径。
+//        reportDir "$rootDir/build/outputs/reports/"
+        // 更改Gradle保存测试结果的目录. 默认情况下，Gradle将测试报告保存在 path_to_your_project/module_name/build/outputs/test-results/ 目录中。
+        //'rootDir' 设置相对于当前项目的根目录的路径。
+//        resultsDir "$rootDir/build/outputs/reports/"
+
+        // 仅为本地单元测试指定选项。
+        unitTests {
+            // 默认情况下，每当您要测试的代码尝试访问Android平台API时，本地单元测试都会引发异常（除非您自己模拟Android依赖关系或使用Mockito等测试框架进行模拟）。
+            // 但是，您可以启用以下属性，以便在访问平台API时测试返回null或零，而不是引发异常。
+            returnDefaultValues true
+            // 封装用于控制Gradle如何执行本地单元测试的选项。有关您可以指定的所有选项的列表，请阅读Gradle的参考文档。
+            all {
+                // 为测试JVM设置JVM参数。
+                jvmArgs '-XX:MaxPermSize=256m'
+                // 您也可以检查任务名称，以将选项仅应用于您指定的测试。
+                if (it.name == 'testDebugUnitTest') {
+                    systemProperty 'debug', 'true'
+                }
+            }
+        }
+
+    }
+
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    //配置多种产品口味
+    //可以使用自己的设置覆盖defaultConfig块
+//    flavorDimensions "api", "mode"
+//    productFlavors {
+//        free {
+//            dimension "mode"
+//            //applicationId 'com.example.myapp.free'
+//            applicationIdSuffix ".free"
+//            versionNameSuffix "-free"
+//        }
+//
+//        paid {
+//            dimension "mode"
+//            //applicationId 'com.example.myapp.paid'
+//            applicationIdSuffix ".paid"
+//            versionNameSuffix "-paid"
+//        }
+//
+//        minApi24 {
+//            dimension "api"
+//            minSdkVersion 24
+//            versionCode 30000 + android.defaultConfig.versionCode
+//            versionNameSuffix "-minApi24"
+//        }
+//    }
+//    //过滤变体
+//    variantFilter { variant ->
+//        def names = variant.flavors*.name
+//        if (names.contains("minApi24") && names.contains("free")) {
+//            setIgnore(true)
+//        }
+//    }
+//    variantFilter { variant ->
+//        def names = variant.flavors*.name
+//        if (variant.buildType.name == 'debug') {
+//            setIgnore(true)
+//        }
+//    }
 }
 
 dependencies {
+    //implementation project(':mylibrary')  //本地库模块依赖项
+
+    //implementation fileTree(dir: 'libs', include: ['*.jar'])  //本地二进制文件依赖项
+    //implementation files('libs/foo.jar', 'libs/bar.jar')
+
+    //implementation 'com.example.android:app-magic:12.3'   //远程二进制文件依赖项
+    //implementation group: 'com.example.android', name: 'app-magic', version: '12.3'
+
+    //常用的 implementation api annotationProcessor
+
+    //特定的构建变体源代码集或测试源代码集声明依赖项  组合他们：free Debug RuntimeOnly
 
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'com.google.android.material:material:1.2.1'
@@ -71,8 +175,8 @@ dependencies {
     //room数据库
     def room_version = "2.2.6"
     implementation "androidx.room:room-runtime:$room_version"
-    annotationProcessor "androidx.room:room-compiler:$room_version"
-
+    annotationProcessor "androidx.room:room-compiler:$room_version" //添加注释处理器
+    //room数据库的异步框架
     implementation "androidx.room:room-rxjava2:$room_version"
 
     //下拉刷新 上拉加载
@@ -91,7 +195,8 @@ dependencies {
     //rxjava
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
 
-//    testImplementation 'junit:junit:4.13.2'
-//    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-//    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    //为本地测试和插桩测试添加 implementation 依赖项
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 }
