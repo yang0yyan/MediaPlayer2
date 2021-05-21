@@ -122,6 +122,11 @@ public class CastMusicActivity extends BaseNetMediaActivity<CastMusicPresenter> 
     }
 
     @Override
+    public void onMoreClick(View v, int position) {
+
+    }
+
+    @Override
     protected void onMediaControllerConnected() {
         super.onMediaControllerConnected();
         isConnect = true;

@@ -1,5 +1,7 @@
 package com.yy.mediaplayer.utils;
 
+import android.content.Context;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,5 +31,10 @@ public class FileUtil {
             }
         }
         return list;
+    }
+
+    public static void getFile(Context context){
+        File file = context.getFilesDir();
+        file.getPath();
     }
 }

@@ -218,7 +218,7 @@ public class ScanActivity extends BaseNetActivity<ScanRoomPresenter> implements 
                             }
                         });
                     MusicInfoEntity bean = getMusicInfo(f);
-                    if (null == bean) return;
+                    if (null == bean) continue;
                     list.add(bean);
                 }
             }

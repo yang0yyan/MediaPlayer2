@@ -3,7 +3,9 @@ package com.yy.mediaplayer.activity.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -22,12 +24,14 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.ViewHolder> 
         TextView title;
         TextView msg;
         ConstraintLayout cl;
+        ImageView more;
 
         public ViewHolder(View view) {
             super(view);
             title = view.findViewById(R.id.title);
             msg = view.findViewById(R.id.msg);
             cl = view.findViewById(R.id.cl);
+            more = view.findViewById(R.id.more);
         }
 
     }
@@ -60,6 +64,19 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.ViewHolder> 
                     onItemClickListener.onItemClick(v, position);
             }
         });
+        holder.cl.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                return true;
+            }
+        });
+        holder.more.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (null != onItemClickListener)
+                    onItemClickListener.onMoreClick(v, position);
+            }
+        });
     }
 
     @Override
@@ -75,5 +92,6 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.ViewHolder> 
 
     public interface OnItemClickListener {
         void onItemClick(View v, int position);
+        void onMoreClick(View v, int position);
     }
 }

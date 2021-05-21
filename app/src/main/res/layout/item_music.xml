@@ -13,8 +13,8 @@
         android:layout_width="6dp"
         android:layout_height="match_parent"
         android:layout_marginStart="2dp"
-        android:text=""
         android:background="@color/black"
+        android:text=""
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,23 +34,23 @@
         android:id="@+id/title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:layout_marginEnd="20dp"
-        android:text="asd"
         android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:gravity="center_vertical"
+        android:text="asd"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/msg"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/more"
         app:layout_constraintStart_toEndOf="@+id/iv" />
 
     <TextView
         android:id="@+id/msg"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
-        android:text="asd"
         android:layout_marginStart="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="10dp"
+        android:text="asd"
+        app:layout_constraintEnd_toStartOf="@+id/more"
         app:layout_constraintStart_toEndOf="@+id/iv"
         app:layout_constraintTop_toTopOf="@+id/guideline" />
 
@@ -60,5 +60,15 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.5" />
+
+    <ImageView
+        android:id="@+id/more"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_more" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -96,6 +96,11 @@ public class LocalMusicActivity extends BaseNetMediaActivity<LocalMusicPresenter
     }
 
     @Override
+    public void onMoreClick(View v, int position) {
+
+    }
+
+    @Override
     protected void onMediaControllerConnected() {
         super.onMediaControllerConnected();
         isConnect = true;
