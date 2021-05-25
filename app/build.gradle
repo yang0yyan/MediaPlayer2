@@ -8,13 +8,13 @@ android {
             storeFile file('C:\\Users\\Administrator\\Desktop\\project\\MediaPlayer\\key.jks')
             storePassword '111111'
             keyPassword '111111'
-            keyAlias 'key0'
+            keyAlias 'mp'
         }
         debug {
             storeFile file('C:\\Users\\Administrator\\Desktop\\project\\MediaPlayer\\key.jks')
             storePassword '111111'
             keyPassword '111111'
-            keyAlias 'key0'
+            keyAlias 'mp'
         }
     }
     //指定Gradle用来编译应用程序的Android API级别  指定可以运行App的手机系统上限
@@ -71,7 +71,6 @@ android {
         }
         debug {
             debuggable true
-            signingConfig signingConfigs.debug
         }
     }
 
