@@ -107,6 +107,7 @@ public class CastMusicActivity extends BaseNetMediaActivity<CastMusicPresenter> 
             } else {
                 musicInfo.setFilePath(musicBean.getSource());
             }
+            musicInfo.setImageUrl(path + musicBean.getImage());
             listMusicInfo.add(musicInfo);
         }
         MusicQueueManager.getInstance().setListMusicInfo(listMusicInfo);

@@ -17,6 +17,7 @@ import com.yy.mediaplayer.base.BaseMediaFragment;
 import com.yy.mediaplayer.databinding.FragmentMusicControlBinding;
 import com.yy.mediaplayer.utils.LogHelper;
 import com.yy.mediaplayer.utils.TimeUtil;
+import com.yy.mediaplayer.utils.imageCache.BitmapUtil;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -68,6 +69,8 @@ public class MusicControlsFragment extends BaseMediaFragment implements View.OnC
     protected void onMetadataChanged(MediaMetadataCompat metadata) {
         super.onMetadataChanged(metadata);
         binding.tvName.setText(mMediaDescription.getTitle());
+        if (null != mMediaDescription.getIconUri())
+            BitmapUtil.getInstance().disPlay(binding.ivAlbum, mMediaDescription.getIconUri().toString());
         binding.tvTotalTime.setText(TimeUtil.MilliToMinut(mMediaMetadata.getLong(MediaMetadataCompat.METADATA_KEY_DURATION)));
         binding.seekTime.setMax((int) mMediaMetadata.getLong(MediaMetadataCompat.METADATA_KEY_DURATION));
     }

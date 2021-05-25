@@ -3,8 +3,10 @@ package com.yy.mediaplayer.net;
 
 import com.yy.mediaplayer.room.AppDatabase;
 import com.yy.mediaplayer.room.DBManager;
+import com.yy.mediaplayer.room.RoomBaseCompletable;
 import com.yy.mediaplayer.room.RoomBaseConsumer;
 
+import io.reactivex.Completable;
 import io.reactivex.Flowable;
 import io.reactivex.Observable;
 import io.reactivex.Single;
@@ -87,6 +89,21 @@ public class BasePresenter<V extends BaseView> {
                     @Override
                     public void accept(@NonNull Throwable throwable) {
                         consumer.onError(throwable);
+                    }
+                }));
+    }
+
+    protected void addDisposable(Completable observable, RoomBaseCompletable completable) {
+        if (compositeDisposable == null) {
+            compositeDisposable = new CompositeDisposable();
+        }
+        compositeDisposable.add(observable
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(completable, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        completable.onError(throwable);
                     }
                 }));
     }

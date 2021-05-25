@@ -1,12 +1,8 @@
 package com.yy.mediaplayer.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
-import android.os.Bundle;
+import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.SystemClock;
 import android.renderscript.Allocation;
@@ -19,11 +15,11 @@ import android.view.View;
 import android.widget.SeekBar;
 
 import com.yy.mediaplayer.R;
-import com.yy.mediaplayer.activity.fragment.MusicControlsFragment;
 import com.yy.mediaplayer.base.BaseMediaActivity;
 import com.yy.mediaplayer.databinding.ActivityMusicPlayBinding;
 import com.yy.mediaplayer.utils.LogHelper;
 import com.yy.mediaplayer.utils.TimeUtil;
+import com.yy.mediaplayer.utils.imageCache.BitmapUtil;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -74,14 +70,18 @@ public class MusicPlayActivity extends BaseMediaActivity implements View.OnClick
     @Override
     protected void onResume() {
         super.onResume();
-        blur(BitmapFactory.decodeResource(getResources(), R.drawable.bg_music),binding.ivBg,24);
+//        blur(BitmapFactory.decodeResource(getResources(), R.drawable.bg_music), binding.ivBg, 24);
     }
 
-    private void blur(Bitmap bkg, View view, float radius) {
-//        View view1 = getWindow().getDecorView();
-//        Bitmap overlay = Bitmap.createBitmap(view1.getWidth(), view1.getHeight(), Bitmap.Config.ARGB_8888);
-//        Canvas canvas = new Canvas(overlay);
-//        canvas.drawBitmap(bkg, -view.getLeft(), -view.getTop(), null);
+    private void blur(Drawable drawable, View view, float radius) {
+        BitmapDrawable bd = (BitmapDrawable) drawable;
+        blur(bd.getBitmap(), view, radius);
+    }
+
+
+    private void blur(Bitmap bkg1, View view, float radius) {
+        Bitmap bkg = bkg1.copy(bkg1.getConfig(), false);
+
         RenderScript rs = RenderScript.create(this);
         Allocation overlayAlloc = Allocation.createFromBitmap(rs, bkg);
         ScriptIntrinsicBlur blur = ScriptIntrinsicBlur.create(rs, overlayAlloc.getElement());
@@ -98,6 +98,11 @@ public class MusicPlayActivity extends BaseMediaActivity implements View.OnClick
     protected void onMetadataChanged(MediaMetadataCompat metadata) {
         super.onMetadataChanged(metadata);
         binding.tvName.setText(mMediaDescription.getTitle());
+        if (null != mMediaDescription.getIconUri()) {
+            BitmapUtil.getInstance().disPlay(binding.ivAlbum, mMediaDescription.getIconUri().toString());
+            BitmapUtil.getInstance().disPlay(binding.ivBg, mMediaDescription.getIconUri().toString());
+            blur(binding.ivBg.getDrawable(), binding.ivBg, 24);
+        }
         binding.tvTotalTime.setText(TimeUtil.MilliToMinut(mMediaMetadata.getLong(MediaMetadataCompat.METADATA_KEY_DURATION)));
         binding.seekTime.setMax((int) mMediaMetadata.getLong(MediaMetadataCompat.METADATA_KEY_DURATION));
     }

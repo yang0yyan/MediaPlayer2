@@ -9,9 +9,11 @@ public interface LocalMusicView {
 
     interface view extends BaseView {
         void onSuccess(List<MusicInfoEntity> listMusicInfo);
+        void onDeleteSuccess(int p);
     }
 
     interface presenter {
         void getMusic();
+        void deleteMusic(MusicInfoEntity entity,int p);
     }
 }

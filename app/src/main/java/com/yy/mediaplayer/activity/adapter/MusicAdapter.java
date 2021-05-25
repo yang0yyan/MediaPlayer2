@@ -5,7 +5,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -13,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.yy.mediaplayer.R;
 import com.yy.mediaplayer.room.entity.MusicInfoEntity;
+import com.yy.mediaplayer.utils.imageCache.BitmapUtil;
 
 import java.util.List;
 
@@ -25,6 +25,7 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.ViewHolder> 
         TextView msg;
         ConstraintLayout cl;
         ImageView more;
+        ImageView album;
 
         public ViewHolder(View view) {
             super(view);
@@ -32,6 +33,7 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.ViewHolder> 
             msg = view.findViewById(R.id.msg);
             cl = view.findViewById(R.id.cl);
             more = view.findViewById(R.id.more);
+            album = view.findViewById(R.id.iv);
         }
 
     }
@@ -77,6 +79,7 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.ViewHolder> 
                     onItemClickListener.onMoreClick(v, position);
             }
         });
+        BitmapUtil.getInstance().disPlay(holder.album, listMusicInfo.get(position).getImageUrl());
     }
 
     @Override
@@ -92,6 +95,7 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.ViewHolder> 
 
     public interface OnItemClickListener {
         void onItemClick(View v, int position);
+
         void onMoreClick(View v, int position);
     }
 }

@@ -1,6 +1,7 @@
 package com.yy.mediaplayer.room.dao;
 
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
@@ -9,6 +10,7 @@ import com.yy.mediaplayer.room.entity.MusicInfoEntity;
 
 import java.util.List;
 
+import io.reactivex.Completable;
 import io.reactivex.Flowable;
 import io.reactivex.Single;
 
@@ -20,4 +22,7 @@ public interface MusicInfoDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     Single<long[]> insertAll(List<MusicInfoEntity> infos);
+
+    @Delete
+    Completable delete(MusicInfoEntity users);
 }

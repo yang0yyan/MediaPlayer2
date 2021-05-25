@@ -2,6 +2,7 @@ package com.yy.mediaplayer.net.presenter;
 
 import com.yy.mediaplayer.net.BasePresenter;
 import com.yy.mediaplayer.net.view.LocalMusicView;
+import com.yy.mediaplayer.room.RoomBaseCompletable;
 import com.yy.mediaplayer.room.RoomBaseConsumer;
 import com.yy.mediaplayer.room.dao.MusicInfoDao;
 import com.yy.mediaplayer.room.entity.MusicInfoEntity;
@@ -30,4 +31,20 @@ public class LocalMusicPresenter extends BasePresenter<LocalMusicView.view> impl
             }
         });
     }
+
+    @Override
+    public void deleteMusic(MusicInfoEntity entity,int p) {
+        addDisposable(dao.delete(entity), new RoomBaseCompletable() {
+            @Override
+            public void onSuccess() {
+                baseView.onDeleteSuccess(p);
+            }
+
+            @Override
+            public void onError(String msg) {
+                baseView.showError(msg);
+            }
+        });
+    }
+
 }

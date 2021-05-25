@@ -63,7 +63,12 @@ public abstract class BaseMediaActivity extends BaseActivity {
     @Override
     protected void onStop() {
         super.onStop();
+        if(null!=mediaBrowser)
         mediaBrowser.disconnect();
+        MediaControllerCompat mediaController = MediaControllerCompat.getMediaController(this);
+        if (mediaController != null) {
+            mediaController.unregisterCallback(mMediaControllerCallback);
+        }
     }
 
     @Override

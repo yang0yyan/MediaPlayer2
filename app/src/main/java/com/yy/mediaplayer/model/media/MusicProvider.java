@@ -100,7 +100,8 @@ public class MusicProvider implements Playback.Callback {
                 .putString(MediaMetadataCompat.METADATA_KEY_DISPLAY_TITLE, musicInfo.getName())
                 .putString(MediaMetadataCompat.METADATA_KEY_DISPLAY_SUBTITLE, musicInfo.getArtist())
                 .putString(MediaMetadataCompat.METADATA_KEY_DISPLAY_DESCRIPTION, musicInfo.getAlbum())
-                .putLong(MediaMetadataCompat.METADATA_KEY_DURATION, musicInfo.getDuration());
+                .putLong(MediaMetadataCompat.METADATA_KEY_DURATION, musicInfo.getDuration())
+                .putString(MediaMetadataCompat.METADATA_KEY_ALBUM_ART_URI, musicInfo.getImageUrl());
         mediaSession.setMetadata(mediaMetadataBuilder.build());
     }
 

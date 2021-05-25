@@ -1,16 +1,27 @@
 package com.yy.mediaplayer.utils;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Environment;
+import android.util.Log;
 
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import okhttp3.Response;
+
 public class FileUtil {
     public static List<Map<String, String>> getFileFromPath(String mPath) {
-        if(null==mPath||mPath.equals(""))return null;
+        if (null == mPath || mPath.equals("")) return null;
         return getFileFromPath(new File(mPath));
     }
 
@@ -33,8 +44,10 @@ public class FileUtil {
         return list;
     }
 
-    public static void getFile(Context context){
-        File file = context.getFilesDir();
-        file.getPath();
+    public static boolean deleteFile(String filePath){
+        File file = new File(filePath);
+        if(file.exists())
+            return file.delete();
+        return true;
     }
 }

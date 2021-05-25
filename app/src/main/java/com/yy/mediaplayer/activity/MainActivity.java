@@ -1,7 +1,6 @@
 package com.yy.mediaplayer.activity;
 
 import android.content.Intent;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -91,7 +90,7 @@ public class MainActivity extends BaseNetMediaActivity<MainPresenter> implements
 
     @Override
     protected void initData() {
-        mPresenter.getMusicList();
+//        mPresenter.getMusicList();
         startService(new Intent(this, MediaService.class));
     }
 

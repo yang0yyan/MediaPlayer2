@@ -16,7 +16,7 @@ public class PermissionUtil {
     public static String WRITE_EXTERNAL_STORAGE = Manifest.permission.WRITE_EXTERNAL_STORAGE;   //内存写入
     public static String RECORD_AUDIO = Manifest.permission.RECORD_AUDIO;                       //录音
     public static String ALERT_WINDOW = Manifest.permission.SYSTEM_ALERT_WINDOW;
-    public static String ACCESS_MEDIA_LOCATION = Manifest.permission.ACCESS_MEDIA_LOCATION;
+    public static String ACCESS_MEDIA_LOCATION = Manifest.permission.ACCESS_MEDIA_LOCATION;     //获取图片位置信息 android 10
 
     public static String ACCESS_COARSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;   //获取粗略的位置信息
     public static String ACCESS_FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;       //获取较精确的位置信息 *Android 10
@@ -28,9 +28,6 @@ public class PermissionUtil {
             int request = ContextCompat.checkSelfPermission(activity,
                     permission);
             if (request != PackageManager.PERMISSION_GRANTED) {//缺少权限，进行权限申请
-                /*Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION);
-                intent.setData(Uri.parse("package:" + activity.getPackageName()));
-                activity.startActivityForResult(intent,100);*/
                 //当前上下文;一个权限数组;一个唯一的请求码(0~65535的16位数)
                 ActivityCompat.requestPermissions(activity,
                         new String[]{permission},

@@ -24,6 +24,7 @@ public class MusicInfoEntity implements Serializable {
     private String artist;
     private String bitrate;
     private long duration;
+    private String imageUrl;
 
 
     public String getId() {
@@ -88,5 +89,13 @@ public class MusicInfoEntity implements Serializable {
 
     public void setDuration(long duration) {
         this.duration = duration;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }
