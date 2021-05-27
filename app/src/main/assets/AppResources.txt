@@ -1,0 +1,24 @@
+多种语言
+屏幕方向和大小
+夜间模式（深色模式）
+
+res/
+    drawable/   图片（.png、.9.png、.jpg、.gif、.xml）
+    layout/     用户界面布局
+    mipmap/     启动器图标
+    values/     包含字符串、整型数和颜色等简单值的 XML 文件
+        arrays.xml      数组
+        colors.xml      颜色
+        dimens.xml      尺寸
+        strings.xml     字符
+        styles.xml      样式
+    animator/   属性动画
+    anim/       渐变动画
+    color/      颜色
+    menu/       应用菜单
+    raw/        以原始形式保存的任意文件
+    xml/        xml
+    font/       字体
+
+处理配置变更
+    屏幕方向、键盘可用性、多窗口模式

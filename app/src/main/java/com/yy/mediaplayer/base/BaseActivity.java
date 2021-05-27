@@ -44,12 +44,13 @@ public abstract class BaseActivity extends AppCompatActivity {
         actionBar.hide();
     }
 
-    private void setScreenRoate(Boolean screenRoate) {
+    public void setScreenRoate(Boolean screenRoate) {
         if (screenRoate) {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);//设置竖屏模式
         } else {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         }
+//        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
     }
 
     @Override

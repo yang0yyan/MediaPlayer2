@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+    android:duration="200"
+    android:fillAfter="true">
+    <!--    pivotY 原点y坐标加上自身高度的百分之百 的位置-->
+    <!-- 放大动画实现-->
+<!--    <scale-->
+<!--        android:fromXScale="1"-->
+<!--        android:toXScale="1"-->
+<!--        android:fromYScale="0"-->
+<!--        android:toYScale="1"-->
+<!--        android:pivotX="0"-->
+<!--        android:pivotY="0"/>-->
+<!--    平移动画实现-->
+        <translate
+            android:fromXDelta="1"
+            android:fromYDelta="100%"
+            android:toXDelta="1"
+            android:toYDelta="0" />
+
+</set>
