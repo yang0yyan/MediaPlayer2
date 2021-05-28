@@ -53,6 +53,26 @@ android {
         buildFeatures {
             viewBinding = true
         }
+
+        externalNativeBuild {
+            cmake {
+                //配置编译 C/C++ 源文件为哪几个 CPU 指令集的函数库 ([arm64-v8a, armeabi-v7a, armeabi, x86, x86_64] 等)
+//                abiFilters "armeabi-v7a","arm64-v8a","x86","x86_64"
+//                abiFilters "armeabi-v7a"
+                abiFilters "x86"
+//                abiFilters "x86_64"
+//                abiFilters "arm64-v8a"
+            }
+        }
+//
+        ndk {
+            // 打包生成的 APK 文件指挥包含 ARM 指令集的动态库
+//            abiFilters "armeabi-v7a","arm64-v8a","x86","x86_64"
+//            abiFilters "armeabi-v7a"
+            abiFilters "x86"
+//            abiFilters "x86_64"
+//            abiFilters "arm64-v8a"
+        }
     }
 
 
@@ -109,6 +129,32 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    externalNativeBuild {
+
+        // 配置 CMake 构建脚本 CMakeLists.txt 脚本路径
+        cmake {
+            path "src/main/cpp/CMakeLists.txt"
+            version "3.10.2"
+        }
+    }
+
+//    splits {
+//        // 根据ABI配置多个APK。
+//        abi {
+//            // 允许每个ABI构建多个APK.
+//            enable true
+//            // 默认情况下，所有ABI都包含在内，因此请使用reset（）并包含以指定我们仅希望针对x86和x86_64的APK。
+//
+//            // 将Gradle应该为其创建APK的ABI列表重置为无。
+//            reset()
+//            // 指定Gradle应该为其创建APK的ABI列表。
+//            include "armeabi-v7a","arm64-v8a","x86","x86_64"
+//
+//            // 指定我们是否生成包含所有ABI的通用APK。
+//            universalApk false
+//        }
+//    }
 
     //配置多种产品口味
     //可以使用自己的设置覆盖defaultConfig块

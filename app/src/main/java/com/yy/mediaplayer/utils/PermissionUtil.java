@@ -20,6 +20,7 @@ public class PermissionUtil {
 
     public static String ACCESS_COARSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;   //获取粗略的位置信息
     public static String ACCESS_FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;       //获取较精确的位置信息 *Android 10
+    public static String CAMERA = Manifest.permission.CAMERA;       //获取相机权限
 
     public static boolean getPermission(Activity activity, String permission) {
         //此处做动态权限申请
