@@ -1,19 +1,21 @@
 package com.yy.mediaplayer.activity.fragment;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.yy.mediaplayer.activity.CastMusicActivity;
+import com.yy.mediaplayer.activity.LocalMusicActivity;
+import com.yy.mediaplayer.activity.VideoPlayActivity;
 import com.yy.mediaplayer.base.BaseFragment;
 import com.yy.mediaplayer.databinding.FragmentVideoBinding;
 import com.yy.mediaplayer.utils.PermissionUtil;
 import com.yy.mediaplayer.utils.imageCache.BitmapUtil;
 
-public class VideoFragment extends BaseFragment {
+public class VideoFragment extends BaseFragment implements View.OnClickListener{
 
     private FragmentVideoBinding binding;
-
-    private String path = "https://alifei03.cfp.cn/creative/vcg/800/new/VCG41N1172479732.jpg";
 
     @Override
     protected View getLayoutId(LayoutInflater inflater, ViewGroup container) {
@@ -24,13 +26,17 @@ public class VideoFragment extends BaseFragment {
     @Override
     protected void initView() {
 
+        binding.ivVideo.setOnClickListener(this);
     }
 
     @Override
     protected void initData() {
-        PermissionUtil.getPermission(getActivity(), PermissionUtil.WRITE_EXTERNAL_STORAGE);
-        BitmapUtil bitmapUtil = new BitmapUtil();
-        bitmapUtil.disPlay(binding.imageView, path);
-//        CacheUtil.getInstance(mContext).setImageToView(path,binding.imageView);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v == binding.ivVideo) {
+            startActivity(new Intent(mContext, VideoPlayActivity.class));
+        }
     }
 }

@@ -7,12 +7,20 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/iv_video"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+        android:layout_margin="10dp"
+        android:background="@drawable/iv_local_video"/>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="本地视频"
+        app:layout_constraintEnd_toEndOf="@+id/iv_music"
+        app:layout_constraintStart_toStartOf="@+id/iv_video"
+        app:layout_constraintTop_toBottomOf="@+id/iv_video" />
 </androidx.constraintlayout.widget.ConstraintLayout>

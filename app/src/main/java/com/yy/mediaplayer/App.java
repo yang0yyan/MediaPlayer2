@@ -2,6 +2,7 @@ package com.yy.mediaplayer;
 
 import android.app.Application;
 
+import com.yy.mediaplayer.model.protocol.StreamProtocolFactory;
 import com.yy.mediaplayer.room.DBManager;
 import com.yy.mediaplayer.utils.ActivityManagerUtil;
 import com.yy.mediaplayer.utils.ToastUtil;
@@ -17,6 +18,7 @@ public class App extends Application {
     private void init() {
         ToastUtil.init(this);
         DBManager.init(this);
+        StreamProtocolFactory.setAppContext(this);
     }
 
     @Override
