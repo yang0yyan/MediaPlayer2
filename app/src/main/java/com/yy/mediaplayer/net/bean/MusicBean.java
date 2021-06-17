@@ -1,6 +1,8 @@
 package com.yy.mediaplayer.net.bean;
 
-public class MusicBean {
+import java.io.Serializable;
+
+public class MusicBean implements Serializable {
     private String title;
     private String album;
     private String artist;

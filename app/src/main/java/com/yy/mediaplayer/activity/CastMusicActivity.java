@@ -88,6 +88,10 @@ public class CastMusicActivity extends BaseNetMediaActivity<CastMusicPresenter> 
 
     @Override
     public void onSuccess(List<MusicBean> list) {
+        if (null == list) {
+            showError("获取数据为空");
+            return;
+        }
         listMusicInfo.clear();
         for (MusicBean musicBean : list) {
             MusicInfoEntity musicInfo = new MusicInfoEntity();

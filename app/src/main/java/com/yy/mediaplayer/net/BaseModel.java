@@ -43,7 +43,7 @@ public class BaseModel<T> implements Serializable {
         return "BaseModel{" +
                 "reason='" + reason + '\'' +
                 ", errno=" + errno +
-                ", albumdata=" + music.toString() +
+//                ", albumdata=" + music.toString() +
                 '}';
     }
 }

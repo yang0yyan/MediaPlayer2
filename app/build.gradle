@@ -80,7 +80,7 @@ android {
     //默认情况下，构建系统定义两种构建类型：调试和发布
     buildTypes {
         release {
-            debuggable false
+            debuggable true
             // 对项目的发行版本类型启用代码收缩，混淆和优化
             minifyEnabled true
             // 启用资源缩减功能
