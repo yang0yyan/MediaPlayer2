@@ -1,5 +1,7 @@
 package com.yy.mediaplayer.net;
 
+import com.yy.mediaplayer.net.bean.BaseModel;
+
 public interface BaseView {
     //显示dialog
     void showLoading();

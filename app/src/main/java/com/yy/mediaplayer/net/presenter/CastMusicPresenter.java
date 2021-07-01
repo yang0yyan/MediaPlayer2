@@ -2,7 +2,7 @@ package com.yy.mediaplayer.net.presenter;
 
 import android.util.Log;
 
-import com.yy.mediaplayer.net.BaseModel;
+import com.yy.mediaplayer.net.bean.BaseModel;
 import com.yy.mediaplayer.net.BaseObserver;
 import com.yy.mediaplayer.net.BasePresenter;
 import com.yy.mediaplayer.net.bean.MusicBean;
@@ -18,8 +18,7 @@ public class CastMusicPresenter extends BasePresenter<CastMusicView.view> implem
         addDisposable(apiServer.getMusic(), new BaseObserver<MusicBean>() {
             @Override
             public void onSuccess(BaseModel<MusicBean> o) {
-                Log.d("11111111111111111111111111", "onSuccess: "+o);
-                baseView.onSuccess(o.getResult());
+                baseView.onSuccess(o.getMusic());
             }
 
             @Override

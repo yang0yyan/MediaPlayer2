@@ -2,7 +2,7 @@ package com.yy.mediaplayer.net.presenter;
 
 import android.util.Log;
 
-import com.yy.mediaplayer.net.BaseModel;
+import com.yy.mediaplayer.net.bean.BaseModel;
 import com.yy.mediaplayer.net.BaseObserver;
 import com.yy.mediaplayer.net.BasePresenter;
 import com.yy.mediaplayer.net.bean.MusicBean;
@@ -21,7 +21,7 @@ public class MainPresenter extends BasePresenter<MainView.view> implements MainV
             @Override
             public void onSuccess(BaseModel<MusicBean> o) {
                 LogHelper.d("TAG", o.toString());
-                baseView.onSuccess(o.getResult());
+                baseView.onSuccess(o.getMusic());
             }
 
             @Override

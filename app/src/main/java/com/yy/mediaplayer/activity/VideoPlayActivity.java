@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.Toast;
 
+import androidx.annotation.Keep;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -108,7 +109,7 @@ public class VideoPlayActivity extends BaseActivity {
         PermissionUtil.getPermissions(this, PermissionUtil.READ_EXTERNAL_STORAGE);
     }
 
-
+    @Keep //混淆后不加注解会报错
     public void setSurfaceViewLayoutParams(final int width, final int height) {
         runOnUiThread(new Runnable() {
             @Override

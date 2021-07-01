@@ -1,5 +1,6 @@
 package com.yy.mediaplayer.net;
 
+import com.yy.mediaplayer.net.bean.BaseModel;
 import com.yy.mediaplayer.net.bean.MusicBean;
 
 import io.reactivex.Observable;

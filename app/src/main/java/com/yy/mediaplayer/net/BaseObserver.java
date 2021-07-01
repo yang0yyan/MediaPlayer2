@@ -3,6 +3,7 @@ package com.yy.mediaplayer.net;
 import android.net.ParseException;
 
 import com.google.gson.JsonParseException;
+import com.yy.mediaplayer.net.bean.BaseModel;
 
 import org.json.JSONException;
 

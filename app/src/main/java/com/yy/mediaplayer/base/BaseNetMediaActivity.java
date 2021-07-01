@@ -1,6 +1,6 @@
 package com.yy.mediaplayer.base;
 
-import com.yy.mediaplayer.net.BaseModel;
+import com.yy.mediaplayer.net.bean.BaseModel;
 import com.yy.mediaplayer.net.BasePresenter;
 import com.yy.mediaplayer.net.BaseView;
 import com.yy.mediaplayer.utils.ToastUtil;
