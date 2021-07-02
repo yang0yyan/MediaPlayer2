@@ -5,10 +5,9 @@
     android:versionName="1.0">
 
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="29" />
@@ -16,7 +15,6 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
-
 
     <application
         android:name=".App"
@@ -26,23 +24,25 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MediaPlayer">
+        <activity android:name=".activity.LogonActivity"
+            android:theme="@style/Theme.MediaPlayer.NoActionBar"/>
+        <activity
+            android:name=".activity.LoginActivity"
+            android:theme="@style/Theme.MediaPlayer.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".activity.VideoPlayActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:theme="@style/Theme.MediaPlayer.NoActionBar"
-            android:windowSoftInputMode="adjustResize|stateHidden">
-
-        </activity>
+            android:windowSoftInputMode="adjustResize|stateHidden"/>
         <activity android:name=".activity.EqualizerActivity" />
-        <activity android:name=".TestActivity">
-
-        </activity>
-        <activity android:name=".activity.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".TestActivity" />
+        <activity android:name=".activity.MainActivity"/>
         <activity android:name=".activity.LocalMusicActivity" />
         <activity android:name=".activity.CastMusicActivity" />
         <activity android:name=".activity.ScanActivity" />
@@ -51,7 +51,8 @@
             android:name=".activity.MusicPlayActivity"
             android:theme="@style/Theme.MediaPlayer.NoActionBar" />
 
-        <service android:name=".service.MediaService">
+        <service android:name=".service.MediaService"
+            android:exported="false">
             <intent-filter>
                 <action android:name="android.media.browse.MediaBrowserService" />
             </intent-filter>
