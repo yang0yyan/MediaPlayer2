@@ -10,7 +10,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 public class DBManager {
     private static volatile AppDatabase db;
     private static Context context = null;
-
+    //数据库升级 1->2
     static final Migration MIGRATION_1_2 = new Migration(1, 2) {
         @Override
         public void migrate(SupportSQLiteDatabase database) {
