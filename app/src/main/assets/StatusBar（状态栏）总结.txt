@@ -1,0 +1,79 @@
+https://zhuanlan.zhihu.com/p/111481900
+
+在Android4.4 以下，我们可以对StatusBar和 NavigationBar进行显示和隐藏操作
+直到Android4.4,我们才能真正意义上的实现沉浸式状态栏
+
+从Android4.4 到现在（Android 9），关于沉浸式大概可以分成三个阶段
+
+（1） Android4.4（API 19） - Android 5.0（API 21）： 这个阶段可以实现沉浸式，但是表现得还不是很好，实现方式为: 通过FLAGTRANSLUCENTSTATUS设置状态栏为透明并且为全屏模式，然后通过添加一个与StatusBar 一样大小的View，将View 的 background 设置为我们想要的颜色，从而来实现沉浸式。
+
+（2） Android 5.0（API 21）以上版本： 在Android 5.0的时候，加入了一个重要的属性和方法 android:statusBarColor （对应方法为 setStatusBarColor），通过这个方法我们就可以轻松实现沉浸式。也就是说，从Android5.0开始，系统才真正的支持沉浸式。
+
+（3） Android 6.0（API 23）以上版本：其实Android6.0以上的实现方式和Android 5.0 +是一样，为什么要将它归为一个单独重要的阶段呢？是因为从Android 6.0（API 23）开始，我们可以改状态栏的绘制模式，可以显示白色或浅黑色的内容和图标（除了魅族手机，魅族自家有做源码更改，6.0以下就能实现）。
+
+
+
+
+1.2 Android5.0以上设置状态栏背景颜色
+Android5.0以上可以设置状态栏和导航栏背景颜色，但还不能改变状态栏和导航栏图标和字色。
+
+setStatusBarColor (对应属性：android:statusBarColor),通过这个方法，可以很轻松地实现沉浸式状态栏。
+必须还要配合一个Flag一起使用，FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS.和4.4的flag互斥不能共用,FLAG_TRANSLUCENT_STATUS
+
+将状态栏设置为红色
+    getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+    //注意要清除 FLAG_TRANSLUCENT_STATUS flag
+    getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+    getWindow().setStatusBarColor(getResources().getColor(android.R.color.holo_red_light));
+通过设置主题的方式设置，需要在values-v21文件夹下添加如下主题，达到兼容目的
+    <style name="Theme" parent="Theme.Design.Light.NoActionBar">
+            <item name="android:windowTranslucentStatus">false</item>
+            <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+            <item name="android:statusBarColor">@android:color/holo_red_light</item>
+    </style>
+
+
+1.2.2 图片延伸到状态栏
+
+只需设置windowTranslucentStatus,再将 statusBarColor 设置为透明即可
+    <style name="ImageTranslucentTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
+            <item name="android:windowTranslucentNavigation">true</item>
+            <item name="android:windowTranslucentStatus">true</item>
+            <!-- 设置statusBarColor 为透明-->
+            <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
+
+
+1.3 Android 6.0 +实现状态栏字色和图标浅黑色
+使用Android6.0以下版本沉浸式的时候会遇到一个问题，那就是Android 系统状态栏的字色和图标颜色为白色，当状态栏颜色接近浅色的时候，状态栏上的内容就看不清了。
+
+Android 6.0 新添加了一个属性来解决这个问题，属性是SYSTEMUIFLAGLIGHTSTATUS_BAR，可以设置状态栏字色和图标浅黑色。
+
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                getWindow().getDecorView().setSystemUiVisibility(
+                        View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN|View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+    }
+
+    <style name="Theme" parent="Theme.Design.Light.NoActionBar">
+            <item name="android:windowTranslucentStatus">false</item>
+            <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+            <item name="android:statusBarColor">@android:color/holo_red_light</item>
+            <!-- Android 6.0以上 状态栏字色和图标为浅黑色-->
+            <item name="android:windowLightStatusBar">true</item>
+    </style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

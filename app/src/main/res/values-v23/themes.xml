@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!--沉浸式状态栏 状态栏为背景颜色透明，字体颜色灰色  适用于白色布局-->
+    <style name="Theme.MediaPlayer.NoActionBar.LightFullScreen">
+        <!--设置半透明状态栏 设置为true会使内容区域延伸到状态栏-->
+        <item name="android:windowTranslucentStatus">false</item>
+        <!--设置true避免内容区域延伸到状态栏 设置为半透明状态栏时生效-->
+        <item name="android:fitsSystemWindows">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+
+    <style name="Theme.MediaPlayer.NoActionBar.DarkFullScreen">
+        <!--图片是否延伸到状态栏-->
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+</resources>

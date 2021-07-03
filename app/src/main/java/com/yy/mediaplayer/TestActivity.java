@@ -26,12 +26,12 @@ public class TestActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 customDialog(TestActivity.this,//context
-                        R.layout.view_share,//你的布局文件
+                        R.layout.dialog_loading,//你的布局文件
                         R.style.showDialog,//你的样式文件 在styles.xml文件中定义
-                        Gravity.BOTTOM,//弹出的位置
-                        WindowManager.LayoutParams.MATCH_PARENT,//宽
+                        Gravity.CENTER,//弹出的位置
+                        WindowManager.LayoutParams.WRAP_CONTENT,//宽
                         WindowManager.LayoutParams.WRAP_CONTENT,//高
-                        R.style.AnimBottom);
+                        0);
             }
         });
 
@@ -68,7 +68,8 @@ public class TestActivity extends BaseActivity {
 //        layoutParams.y = 180;//距离顶部的距离
         dialog.getWindow().setAttributes(layoutParams);
         dialog.getWindow().setGravity(gravity);
-        dialog.getWindow().setWindowAnimations(animation);
+        if (0 != animation)
+            dialog.getWindow().setWindowAnimations(animation);
         dialog.show();
     }
 }

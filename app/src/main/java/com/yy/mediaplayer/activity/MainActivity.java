@@ -119,6 +119,7 @@ public class MainActivity extends BaseNetMediaActivity<MainPresenter> implements
                 startActivity(new Intent(this, EqualizerActivity.class));
                 break;
             case R.id.finish:
+                startActivity(new Intent(this, LoginActivity.class));
                 finish();
                 break;
         }

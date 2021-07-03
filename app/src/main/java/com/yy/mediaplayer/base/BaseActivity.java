@@ -5,12 +5,14 @@ import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.yy.mediaplayer.R;
 import com.yy.mediaplayer.utils.ActivityManagerUtil;
 
 
@@ -18,7 +20,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        SystemBarUtil.setStatusBarColor(this, R.color.TRANSPARENT);
         ActivityManagerUtil.getInstance().addActivity(this);
 //        setScreenRoate(true);
 
@@ -37,6 +38,13 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     protected void createPresenter_() {
 
+    }
+
+    public void setStatusBar(){
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        //注意要清除 FLAG_TRANSLUCENT_STATUS flag
+        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        getWindow().setStatusBarColor(getResources().getColor(android.R.color.holo_red_light));
     }
 
     private void hideActionBar() {

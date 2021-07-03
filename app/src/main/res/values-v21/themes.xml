@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!--沉浸式状态栏 状态栏为背景颜色透明，字体颜色灰色  适用于白色布局-->
+    <style name="Theme.MediaPlayer.NoActionBar.FullScreen">
+        <!--图片是否延伸到状态栏-->
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
+</resources>

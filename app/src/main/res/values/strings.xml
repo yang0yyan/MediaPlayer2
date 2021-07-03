@@ -17,4 +17,12 @@
 
     <string name="notification_channel">Music_Channel_ID</string>
     <string name="notification_channel_description">Channel ID for Music</string>
+    <string name="login">登录</string>
+    <string name="signup">注册账号</string>
+    <string name="forget">忘记密码</string>
+    <string name="sign_up">注册</string>
+    <string name="username">账号</string>
+    <string name="password">密码</string>
+    <string name="email">邮箱</string>
+    <string name="phone">电话</string>
 </resources>
