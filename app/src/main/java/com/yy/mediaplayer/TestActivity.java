@@ -9,6 +9,7 @@ import android.view.WindowManager;
 import com.yy.mediaplayer.base.BaseActivity;
 import com.yy.mediaplayer.databinding.ActivityTestBinding;
 
+// 测试用的
 public class TestActivity extends BaseActivity {
 
     private ActivityTestBinding binding;

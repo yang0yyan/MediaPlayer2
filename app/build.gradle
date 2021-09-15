@@ -44,13 +44,16 @@ android {
         testFunctionalTest true
 
         javaCompileOptions {
+            // 注释处理器选项
             annotationProcessorOptions {
+                // room数据库
                 arguments += ["room.schemaLocation":
                                       "$projectDir/schemas".toString()]
             }
         }
 
         buildFeatures {
+            // 启用viewBinding
             viewBinding = true
         }
 
@@ -138,7 +141,7 @@ android {
             version "3.10.2"
         }
     }
-
+    // 跟externalNativeBuild不能同时使用
     splits {
         // 根据ABI配置多个APK。
         abi {

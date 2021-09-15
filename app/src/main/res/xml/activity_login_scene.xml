@@ -40,6 +40,10 @@
                 app:motionTarget="@+id/et_password"
                 app:percentX="1"
                 app:percentY="0" />
+            <KeyTrigger
+                app:motionTarget="@+id/btn_login"
+                app:framePosition="19"
+                app:onCross="method" />
         </KeyFrameSet>
     </Transition>
 

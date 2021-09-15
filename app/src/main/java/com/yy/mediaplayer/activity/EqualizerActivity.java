@@ -6,6 +6,7 @@ import android.media.MediaPlayer;
 import android.media.audiofx.BassBoost;
 import android.media.audiofx.Equalizer;
 import android.media.audiofx.PresetReverb;
+import android.media.audiofx.Virtualizer;
 import android.media.audiofx.Visualizer;
 import android.os.Bundle;
 import android.util.Log;
@@ -37,6 +38,9 @@ public class EqualizerActivity extends AppCompatActivity {
     private Equalizer equalizer;
     private LinearLayout ll;
     private Visualizer visualizer;
+    private BassBoost bassBoost;
+    private Virtualizer virtualizer;
+    private PresetReverb presetReverb;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -58,6 +62,7 @@ public class EqualizerActivity extends AppCompatActivity {
             setupVisualizer();
             setupEqualizer();
             setupBassBoost();
+            setupVirtualizer();
             setupPresetReverb();
         }
     }
@@ -90,7 +95,7 @@ public class EqualizerActivity extends AppCompatActivity {
                 (int) (120f * getResources().getDisplayMetrics().density)));
         ll.addView(visualizerView);
         visualizer = new Visualizer(mediaPlayer.getAudioSessionId());
-        int result = visualizer.setCaptureSize(Visualizer.getCaptureSizeRange()[0]);
+        int result = visualizer.setCaptureSize(Visualizer.getCaptureSizeRange()[1]);
         if (result != Visualizer.SUCCESS) return;
         visualizer.setDataCaptureListener(new Visualizer.OnDataCaptureListener() {
             //波形数据
@@ -114,6 +119,14 @@ public class EqualizerActivity extends AppCompatActivity {
             }
         }, Visualizer.getMaxCaptureRate() / 2, true, false);
         visualizer.setEnabled(true);
+    }
+
+    private void releaseVisualizer(){
+        if (visualizer != null) {
+            visualizer.setEnabled(false);
+            visualizer.release();
+            visualizer = null;
+        }
     }
 
     @SuppressLint("SetTextI18n")
@@ -191,17 +204,27 @@ public class EqualizerActivity extends AppCompatActivity {
         }
     }
 
-    private void setupBassBoost() {
-        final BassBoost bassBoost = new BassBoost(0, mediaPlayer.getAudioSessionId());
-        bassBoost.setEnabled(true);
+    private void releaseEqualizer(){
+        if (equalizer != null) {
+            equalizer.setEnabled(false);
+            equalizer.release();
+            equalizer = null;
+        }
+    }
 
+    private void setupBassBoost() {
+        bassBoost = new BassBoost(0, mediaPlayer.getAudioSessionId());
+        bassBoost.setEnabled(true);
+        if (!bassBoost.getStrengthSupported()) return;
         TextView bbTextView = new TextView(this);
         bbTextView.setText("重低音： ");
         ll.addView(bbTextView);
+//        BassBoost.PARAM_STRENGTH
+//        BassBoost.PARAM_STRENGTH_SUPPORTED
 
         SeekBar bbSeekBar = new SeekBar(this);
-        bbSeekBar.setMax(1000);
-        bbSeekBar.setProgress(0);
+        bbSeekBar.setMax(100);
+        bbSeekBar.setProgress(bassBoost.getRoundedStrength());
         bbSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -220,14 +243,62 @@ public class EqualizerActivity extends AppCompatActivity {
         });
 
         ll.addView(bbSeekBar);
-
     }
+
+    private void releaseBassBoost(){
+        if (bassBoost != null) {
+            bassBoost.setEnabled(false);
+            bassBoost.release();
+            bassBoost = null;
+        }
+    }
+
+    private void setupVirtualizer() {
+        virtualizer = new Virtualizer(0, mediaPlayer.getAudioSessionId());
+        virtualizer.setEnabled(true);
+        if (!virtualizer.getStrengthSupported()) return;
+        TextView bbTextView = new TextView(this);
+        bbTextView.setText("虚拟化： ");
+        ll.addView(bbTextView);
+
+
+        SeekBar bbSeekBar = new SeekBar(this);
+        bbSeekBar.setMax(100);
+        bbSeekBar.setProgress(virtualizer.getRoundedStrength());
+        bbSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                virtualizer.setStrength((short) progress);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+        ll.addView(bbSeekBar);
+    }
+
+    private void releaseVirtualizer(){
+        if (virtualizer != null) {
+            virtualizer.setEnabled(false);
+            virtualizer.release();
+            virtualizer = null;
+        }
+    }
+
 
     private final List<Short> reverbName = new ArrayList<>();
     private final List<String> reverbVals = new ArrayList<>();
 
     private void setupPresetReverb() {
-        final PresetReverb presetReverb = new PresetReverb(0, mediaPlayer.getAudioSessionId());
+        presetReverb = new PresetReverb(0, mediaPlayer.getAudioSessionId());
         presetReverb.setEnabled(true);
         TextView prTitle = new TextView(this);
         prTitle.setText("音场");
@@ -255,21 +326,35 @@ public class EqualizerActivity extends AppCompatActivity {
         ll.addView(sp);
     }
 
+    private void releasePresetReverb(){
+        if (presetReverb != null) {
+            presetReverb.setEnabled(false);
+            presetReverb.release();
+            presetReverb = null;
+        }
+    }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == 0XFF && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             hasPermission = true;
+            setupVisualizer();
+            setupEqualizer();
+            setupBassBoost();
+            setupVirtualizer();
+            setupPresetReverb();
         }
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (visualizer != null) {
-            visualizer.setEnabled(false);
-            visualizer.release();
-        }
+        releaseBassBoost();
+        releaseEqualizer();
+        releaseVirtualizer();
+        releaseVisualizer();
+        releasePresetReverb();
         Log.i("onDestroy", "销毁");
 
     }

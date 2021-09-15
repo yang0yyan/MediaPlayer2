@@ -2,6 +2,7 @@ package com.yy.mediaplayer.activity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.view.MotionEvent;
 import android.view.View;
 
 import androidx.annotation.Nullable;
