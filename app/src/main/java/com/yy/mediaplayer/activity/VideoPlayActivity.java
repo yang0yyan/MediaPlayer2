@@ -109,7 +109,7 @@ public class VideoPlayActivity extends BaseActivity {
         PermissionUtil.getPermissions(this, PermissionUtil.READ_EXTERNAL_STORAGE);
     }
 
-    @Keep //混淆后不加注解会报错
+    @Keep //混淆后不加"Keep"注解会报错
     public void setSurfaceViewLayoutParams(final int width, final int height) {
         runOnUiThread(new Runnable() {
             @Override
@@ -130,7 +130,6 @@ public class VideoPlayActivity extends BaseActivity {
                 binding.surface.setLayoutParams(params);
             }
         });
-
     }
 
     public void logFromUi(String msg) {
