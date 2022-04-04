@@ -5,13 +5,13 @@ plugins {
 android {
     signingConfigs {
         release {
-            storeFile file('C:\\Users\\Administrator\\Desktop\\project\\MediaPlayer\\MediaPlayerKey.jks')
+            storeFile file('..\\MediaPlayerKey.jks')
             storePassword '111111'
             keyPassword '111111'
             keyAlias 'key0'
         }
         debug {
-            storeFile file('C:\\Users\\Administrator\\Desktop\\project\\MediaPlayer\\key.jks')
+            storeFile file('..\\key.jks')
             storePassword '111111'
             keyPassword '111111'
             keyAlias 'mp'
@@ -60,9 +60,9 @@ android {
         externalNativeBuild {
             cmake {
                 //配置编译 C/C++ 源文件为哪几个 CPU 指令集的函数库 ([arm64-v8a, armeabi-v7a, armeabi, x86, x86_64] 等)
-                abiFilters "armeabi-v7a","arm64-v8a","x86","x86_64"
+//                abiFilters "armeabi-v7a","arm64-v8a","x86","x86_64"
 //                abiFilters "armeabi-v7a"
-//                abiFilters "x86"
+                abiFilters "x86"
 //                abiFilters "x86_64"
 //                abiFilters "arm64-v8a"
             }
@@ -70,7 +70,7 @@ android {
 //
         ndk {
             // 打包生成的 APK 文件指挥包含 ARM 指令集的动态库
-            abiFilters "armeabi-v7a","arm64-v8a","x86","x86_64"
+//            abiFilters "armeabi-v7a","arm64-v8a","x86","x86_64"
 //            abiFilters "armeabi-v7a"
 //            abiFilters "x86"
 //            abiFilters "x86_64"
