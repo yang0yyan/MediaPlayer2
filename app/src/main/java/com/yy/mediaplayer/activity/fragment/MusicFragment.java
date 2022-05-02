@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.yy.mediaplayer.activity.CastMusicActivity;
+import com.yy.mediaplayer.activity.CollectionMusicActivity;
 import com.yy.mediaplayer.activity.LocalMusicActivity;
 import com.yy.mediaplayer.base.BaseFragment;
 import com.yy.mediaplayer.databinding.FragmentMusicBinding;
@@ -24,6 +25,7 @@ public class MusicFragment extends BaseFragment implements View.OnClickListener 
     protected void initView() {
         binding.ivMusic.setOnClickListener(this);
         binding.ivMusic2.setOnClickListener(this);
+        binding.ivMusic3.setOnClickListener(this);
     }
 
     @Override
@@ -37,6 +39,8 @@ public class MusicFragment extends BaseFragment implements View.OnClickListener 
             startActivity(new Intent(mContext, LocalMusicActivity.class));
         } else if (v == binding.ivMusic2) {
             startActivity(new Intent(mContext, CastMusicActivity.class));
+        } else if (v == binding.ivMusic3) {
+            startActivity(new Intent(mContext, CollectionMusicActivity.class));
         }
     }
 }

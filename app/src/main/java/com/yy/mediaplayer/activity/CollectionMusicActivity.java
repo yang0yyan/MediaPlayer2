@@ -27,7 +27,7 @@ import com.yy.mediaplayer.utils.FileUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LocalMusicActivity extends BaseNetMediaActivity<LocalMusicPresenter> implements LocalMusicView.view, MusicAdapter.OnItemClickListener {
+public class CollectionMusicActivity  extends BaseNetMediaActivity<LocalMusicPresenter> implements LocalMusicView.view, MusicAdapter.OnItemClickListener {
 
     List<MusicInfoEntity> listMusicInfo = new ArrayList<>();
     private ActivityLocalMusicBinding binding;
@@ -72,6 +72,7 @@ public class LocalMusicActivity extends BaseNetMediaActivity<LocalMusicPresenter
 
             }
         });
+        binding.etFilename.setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -100,7 +101,7 @@ public class LocalMusicActivity extends BaseNetMediaActivity<LocalMusicPresenter
     }
 
     private void refreshData() {
-        mPresenter.getMusic();
+        mPresenter.getMusicCollection(true);
     }
 
     @Override
@@ -112,8 +113,9 @@ public class LocalMusicActivity extends BaseNetMediaActivity<LocalMusicPresenter
 
     @Override
     public void onUpdateSuccess(int p) {
-        MusicInfoEntity musicInfoEntity = listMusicInfo.get(p);
-        musicInfoEntity.setCollection(!musicInfoEntity.isCollection());
+//        MusicInfoEntity musicInfoEntity = listMusicInfo.get(p);
+//        musicInfoEntity.setCollection(!musicInfoEntity.isCollection());
+        refreshData();
     }
 
     @Override

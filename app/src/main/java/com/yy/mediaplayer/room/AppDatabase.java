@@ -9,7 +9,7 @@ import com.yy.mediaplayer.room.entity.MusicInfoEntity;
 import com.yy.mediaplayer.room.entity.UserInfoEntity;
 
 
-@Database(entities = {MusicInfoEntity.class, UserInfoEntity.class}, version = 2)
+@Database(entities = {MusicInfoEntity.class, UserInfoEntity.class}, version = 3)
 public abstract class AppDatabase extends RoomDatabase {
     public abstract MusicInfoDao musicInfoDao();
     public abstract UserInfoDao userInfoDao();

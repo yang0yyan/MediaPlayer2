@@ -1,5 +1,6 @@
 package com.yy.mediaplayer.activity.adapter;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,7 +57,7 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.ViewHolder> 
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.title.setText(listMusicInfo.get(position).getName());
         holder.msg.setText(listMusicInfo.get(position).getArtist());
         holder.cl.setOnClickListener(new View.OnClickListener() {
