@@ -238,7 +238,7 @@ public class VideoPlayActivity extends BaseActivity implements View.OnClickListe
     }
 
     // 设置屏幕尺寸
-    @Keep //混淆后不加注解会报错
+    @Keep //混淆后不加"Keep"注解会报错
     public void setSurfaceViewLayoutParams(final int width, final int height) {
         this.videoWidth = width;
         this.videoHeight = height;

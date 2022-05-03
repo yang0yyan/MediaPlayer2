@@ -3,11 +3,31 @@ package com.yy.mediaplayer.room.entity;
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 
 import java.io.Serializable;
 
 @Entity(tableName = "music_info", primaryKeys = {"file_path"})
 public class MusicInfoEntity implements Serializable {
+
+    @Ignore
+    public MusicInfoEntity() {
+    }
+
+    public MusicInfoEntity(@NonNull String id, @NonNull String fileName, @NonNull String filePath, String name, String album, String artist, String bitrate, long duration, String imageUrl, boolean isCollection) {
+        this.id = id;
+        this.fileName = fileName;
+        this.filePath = filePath;
+        this.name = name;
+        this.album = album;
+        this.artist = artist;
+        this.bitrate = bitrate;
+        this.duration = duration;
+        this.imageUrl = imageUrl;
+        this.isCollection = isCollection;
+    }
+
+
     @NonNull
     private String id;
 
@@ -25,6 +45,8 @@ public class MusicInfoEntity implements Serializable {
     private String bitrate;
     private long duration;
     private String imageUrl;
+    @ColumnInfo(defaultValue = "0")
+    private boolean isCollection;
 
     @NonNull
     public String getId() {
@@ -97,5 +119,13 @@ public class MusicInfoEntity implements Serializable {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public boolean isCollection() {
+        return isCollection;
+    }
+
+    public void setCollection(boolean collection) {
+        isCollection = collection;
     }
 }

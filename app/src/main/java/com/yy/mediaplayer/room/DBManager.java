@@ -18,10 +18,18 @@ public class DBManager {
         }
     };
 
+    //数据库升级 2->3
+    static final Migration MIGRATION_2_3 = new Migration(2, 3) {
+        @Override
+        public void migrate(SupportSQLiteDatabase database) {
+            database.execSQL("alter table `music_info` add `isCollection` INTEGER NOT NULL DEFAULT 0 ");
+        }
+    };
+
     public static void init(Context context) {
         DBManager.context = context;
         RoomDatabase.Builder<AppDatabase> builder = Room.databaseBuilder(context, AppDatabase.class, "sample.db");
-        builder.addMigrations(MIGRATION_1_2);
+        builder.addMigrations(MIGRATION_1_2,MIGRATION_2_3);
         db = builder.build();
     }
 

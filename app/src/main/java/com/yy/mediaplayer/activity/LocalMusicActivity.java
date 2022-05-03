@@ -1,7 +1,9 @@
 package com.yy.mediaplayer.activity;
 
 import android.support.v4.media.session.MediaControllerCompat;
-import android.view.Gravity;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.PopupWindow;
@@ -53,6 +55,23 @@ public class LocalMusicActivity extends BaseNetMediaActivity<LocalMusicPresenter
         if (mMusicControlsFragment == null) {
             throw new IllegalStateException("Mising fragment with id 'controls'. Cannot continue.");
         }
+
+        binding.etFilename.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                mPresenter.getMusicByFilename(s.toString().trim());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
 
     @Override
@@ -92,6 +111,12 @@ public class LocalMusicActivity extends BaseNetMediaActivity<LocalMusicPresenter
     }
 
     @Override
+    public void onUpdateSuccess(int p) {
+        MusicInfoEntity musicInfoEntity = listMusicInfo.get(p);
+        musicInfoEntity.setCollection(!musicInfoEntity.isCollection());
+    }
+
+    @Override
     public void onDeleteSuccess(int p) {
         FileUtil.deleteFile(listMusicInfo.get(p).getFilePath());
         listMusicInfo.remove(p);
@@ -107,19 +132,60 @@ public class LocalMusicActivity extends BaseNetMediaActivity<LocalMusicPresenter
 
     @Override
     public void onMoreClick(View v, int position) {
-        TextView textView = new TextView(this);
-        textView.setBackgroundColor(0XFF000000);
-        textView.setTextColor(0XFFFFFFFF);
-        textView.setGravity(Gravity.CENTER);
-        textView.setText("刪除");
+        MusicInfoEntity musicInfoEntity = listMusicInfo.get(position);
+//        LinearLayout linearLayout = new LinearLayout(this);
+//        linearLayout.setOrientation(LinearLayout.HORIZONTAL);
+//        linearLayout.setBackgroundColor(0XFF000000);
+//
+//        TextView deleteTv = new TextView(this);
+//        deleteTv.setTextColor(0XFFFFFFFF);
+//        deleteTv.setGravity(Gravity.CENTER);
+//        deleteTv.setText("刪除");
+//
+////        LinearLayout.LayoutParams deleteLp = (LinearLayout.LayoutParams) deleteTv.getLayoutParams();
+////        deleteLp.weight = 1;
+////        deleteTv.setLayoutParams(deleteLp);
+//
+//        TextView collectionTv = new TextView(this);
+//
+//        collectionTv.setTextColor(0XFFFFFFFF);
+//        collectionTv.setGravity(Gravity.CENTER);
+//        collectionTv.setText("收藏");
+////        LinearLayout.LayoutParams collectionLp = (LinearLayout.LayoutParams) collectionTv.getLayoutParams();
+////        collectionLp.weight = 1;
+////        collectionTv.setLayoutParams(collectionLp);
+//
+//        linearLayout.addView(collectionTv);
+//        linearLayout.addView(deleteTv);
 
-        final PopupWindow popupWindow = new PopupWindow(textView,200,80);//参数为1.View 2.宽度 3.高度
+        View view = LayoutInflater.from(this).inflate(R.layout.popup_layout, null);
+        TextView tvCollection = view.findViewById(R.id.tv_collection);
+        TextView tvDelete = view.findViewById(R.id.tv_delete);
+
+        if(musicInfoEntity.isCollection()){
+            tvCollection.setText("取消收藏");
+        }else{
+            tvCollection.setText("收藏");
+        }
+
+        final PopupWindow popupWindow = new PopupWindow(view, 400, 80);//参数为1.View 2.宽度 3.高度
         popupWindow.setOutsideTouchable(true);//设置点击外部区域可以取消popupWindow
         popupWindow.showAsDropDown(v);
-        textView.setOnClickListener(new View.OnClickListener() {
+        tvDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mPresenter.deleteMusic(listMusicInfo.get(position),position);
+                mPresenter.deleteMusic(musicInfoEntity, position);
+                popupWindow.dismiss();
+            }
+        });
+        tvCollection.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                MusicInfoEntity copy = new MusicInfoEntity(musicInfoEntity.getId(), musicInfoEntity.getFileName(), musicInfoEntity.getFilePath(), musicInfoEntity.getName(), musicInfoEntity.getAlbum(), musicInfoEntity.getArtist(), musicInfoEntity.getBitrate(), musicInfoEntity.getDuration(), musicInfoEntity.getImageUrl(), musicInfoEntity.isCollection());
+                copy.setCollection(!copy.isCollection());
+
+                mPresenter.updateMusic(copy, position);
                 popupWindow.dismiss();
             }
         });

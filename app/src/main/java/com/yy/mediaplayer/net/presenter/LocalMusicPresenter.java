@@ -6,6 +6,7 @@ import com.yy.mediaplayer.room.RoomBaseCompletable;
 import com.yy.mediaplayer.room.RoomBaseConsumer;
 import com.yy.mediaplayer.room.dao.MusicInfoDao;
 import com.yy.mediaplayer.room.entity.MusicInfoEntity;
+import com.yy.mediaplayer.room.entity.UserInfoEntity;
 
 import java.util.List;
 
@@ -33,7 +34,52 @@ public class LocalMusicPresenter extends BasePresenter<LocalMusicView.view> impl
     }
 
     @Override
-    public void deleteMusic(MusicInfoEntity entity,int p) {
+    public void getMusicByFilename(String filename) {
+        addDisposable(dao.getMusicByFilename(filename), new RoomBaseConsumer<List<MusicInfoEntity>>() {
+            @Override
+            public void onSuccess(List<MusicInfoEntity> o) {
+                baseView.onSuccess(o);
+            }
+
+            @Override
+            public void onError(String msg) {
+                baseView.showError(msg);
+            }
+        });
+    }
+
+    @Override
+    public void getMusicCollection(boolean isCollection) {
+        addDisposable(dao.getMusicCollection(isCollection), new RoomBaseConsumer<List<MusicInfoEntity>>() {
+            @Override
+            public void onSuccess(List<MusicInfoEntity> o) {
+                baseView.onSuccess(o);
+            }
+
+            @Override
+            public void onError(String msg) {
+                baseView.showError(msg);
+            }
+        });
+    }
+
+    @Override
+    public void updateMusic(MusicInfoEntity infos, int p) {
+        addDisposable(dao.update(infos), new RoomBaseCompletable(baseView) {
+            @Override
+            public void onSuccess() {
+                baseView.onUpdateSuccess(p);
+            }
+
+            @Override
+            public void onError(String msg) {
+                baseView.showError(msg);
+            }
+        });
+    }
+
+    @Override
+    public void deleteMusic(MusicInfoEntity entity, int p) {
         addDisposable(dao.delete(entity), new RoomBaseCompletable() {
             @Override
             public void onSuccess() {

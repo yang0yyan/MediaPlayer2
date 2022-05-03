@@ -81,10 +81,6 @@ public class LoginActivity extends BaseNetActivity<LoginPresenter> implements Vi
             ToastUtil.showToast("用户名或密码不能为空");
             return;
         }
-        if (!username.equals("111111") || !password.equals("111111")) {
-            ToastUtil.showToast("用户名或密码错误");
-            return;
-        }
         mRoomPresenter.toLogin(username, password);
         SharedPreferences sp = getSharedPreferences("mp.sp", MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();

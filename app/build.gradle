@@ -62,7 +62,7 @@ android {
                 //配置编译 C/C++ 源文件为哪几个 CPU 指令集的函数库 ([arm64-v8a, armeabi-v7a, armeabi, x86, x86_64] 等)
 //                abiFilters "armeabi-v7a","arm64-v8a","x86","x86_64"
 //                abiFilters "armeabi-v7a"
-//                abiFilters "x86"
+                abiFilters "x86"
 //                abiFilters "x86_64"
 //                abiFilters "arm64-v8a"
             }
@@ -212,7 +212,7 @@ android {
 }
 
 dependencies {
-    //implementation project(':mylibrary')  //本地库模块依赖项
+    //implementation project(':myLibrary')  //本地库模块依赖项
 
     //implementation fileTree(dir: 'libs', include: ['*.jar'])  //本地二进制文件依赖项
     //implementation files('libs/foo.jar', 'libs/bar.jar')
@@ -224,16 +224,16 @@ dependencies {
 
     //特定的构建变体源代码集或测试源代码集声明依赖项  组合他们：free Debug RuntimeOnly
 
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'com.google.android.material:material:1.2.1'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation 'androidx.appcompat:appcompat:1.3.1'
+    implementation 'com.google.android.material:material:1.4.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.0'
 
     //ViewModel and LiveData
     implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
     //room数据库
-    def room_version = "2.2.6"
+    def room_version = "2.3.0"
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version" //添加注释处理器
     //room数据库的异步框架
