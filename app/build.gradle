@@ -5,13 +5,13 @@ plugins {
 android {
     signingConfigs {
         release {
-            storeFile file('C:\\Users\\Administrator\\Desktop\\project\\MediaPlayer\\MediaPlayerKey.jks')
+            storeFile file('..\\MediaPlayerKey.jks')
             storePassword '111111'
             keyPassword '111111'
             keyAlias 'key0'
         }
         debug {
-            storeFile file('C:\\Users\\Administrator\\Desktop\\project\\MediaPlayer\\key.jks')
+            storeFile file('..\\key.jks')
             storePassword '111111'
             keyPassword '111111'
             keyAlias 'mp'
@@ -133,14 +133,14 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-    externalNativeBuild {
-
-        // 配置 CMake 构建脚本 CMakeLists.txt 脚本路径
-        cmake {
-            path "src/main/cpp/CMakeLists.txt"
-            version "3.10.2"
-        }
-    }
+//    externalNativeBuild {
+//
+//        // 配置 CMake 构建脚本 CMakeLists.txt 脚本路径
+//        cmake {
+//            path "src/main/cpp/CMakeLists.txt"
+//            version "3.10.2"
+//        }
+//    }
     // 跟externalNativeBuild不能同时使用
     splits {
         // 根据ABI配置多个APK。
@@ -259,4 +259,6 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    implementation project(':nativelib')
 }

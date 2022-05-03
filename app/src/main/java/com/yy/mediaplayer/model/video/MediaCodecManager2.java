@@ -176,7 +176,6 @@ public class MediaCodecManager2 {
                     activity.logFromUi("sampleRateInHz: " + sampleRateInHz + "; channelConfig:" + channelConfig + "; audioFormat:" + audioFormat);
                     if (null == audioMediaExtractor)
                         audioMediaExtractor = new MediaExtractor();
-
                     audioMediaExtractor.setDataSource(context, uri, null);
                     audioMediaExtractor.selectTrack(i);
                     audioMediaCodec = MediaCodec.createDecoderByType(mime);
@@ -195,7 +194,6 @@ public class MediaCodecManager2 {
             Log.e(TAG, "initMedia: ", e);
         } finally {
             mediaExtractor.release();
-
         }
 
     }

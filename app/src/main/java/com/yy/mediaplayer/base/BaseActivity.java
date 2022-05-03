@@ -14,16 +14,20 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.yy.mediaplayer.R;
 import com.yy.mediaplayer.utils.ActivityManagerUtil;
+import com.yy.mediaplayer.utils.StatusBarUtil;
 
 
 public abstract class BaseActivity extends AppCompatActivity {
+
+    private int systemUiVisibility;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ActivityManagerUtil.getInstance().addActivity(this);
-//        setScreenRoate(true);
-
         setContentView(getLayoutId());
+        View decorView = getWindow().getDecorView();
+        systemUiVisibility = decorView.getSystemUiVisibility();
         initView();
         createPresenter_();
         initData();
@@ -39,6 +43,9 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void createPresenter_() {
 
     }
+    public void setTranslucentStatus(){
+        StatusBarUtil.setTranslucentStatus(this);
+    }
 
     public void setStatusBar(){
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
@@ -47,9 +54,16 @@ public abstract class BaseActivity extends AppCompatActivity {
         getWindow().setStatusBarColor(getResources().getColor(android.R.color.holo_red_light));
     }
 
-    private void hideActionBar() {
+    public void hideActionBar() {
         ActionBar actionBar = getActionBar();
-        actionBar.hide();
+        if(null!=actionBar){
+            actionBar.hide();
+        }else {
+            androidx.appcompat.app.ActionBar actionBar2 = getSupportActionBar();
+            if(null!=actionBar2){
+                actionBar2.hide();
+            }
+        }
     }
 
     public void setScreenRoate(Boolean screenRoate) {
@@ -69,6 +83,30 @@ public abstract class BaseActivity extends AppCompatActivity {
         } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
             Toast.makeText(this, "portrait", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public void hideSystemUI() {
+        // Enables regular immersive mode.
+        // For "lean back" mode, remove SYSTEM_UI_FLAG_IMMERSIVE.
+        // Or for "sticky immersive," replace it with SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+        View decorView = getWindow().getDecorView();
+        decorView.setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY |
+                        // Set the content to appear under the system bars so that the
+                        // content doesn't resize when the system bars hide and show.
+                        View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        // Hide the nav bar and status bar
+                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_FULLSCREEN);
+    }
+
+    // Shows the system bars by removing all the flags
+    // except for the ones that make the content appear under the system bars.
+    public void showSystemUI() {
+        View decorView = getWindow().getDecorView();
+        decorView.setSystemUiVisibility(systemUiVisibility);
     }
 
     @Override
