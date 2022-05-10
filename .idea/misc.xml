@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/java/project/android/MediaPlayer2/app/src/main/res/drawable/iv_local_video.xml" value="0.36666666666666664" />
+        <entry key="..\:/java/project/android/MediaPlayer2/app/src/main/res/drawable/login_bg.xml" value="0.36666666666666664" />
+        <entry key="..\:/java/project/android/MediaPlayer2/app/src/main/res/drawable/login_input_bg.xml" value="0.36666666666666664" />
+        <entry key="..\:/java/project/android/MediaPlayer2/app/src/main/res/drawable/login_option_bg.xml" value="0.36666666666666664" />
+        <entry key="..\:/java/project/android/MediaPlayer2/app/src/main/res/drawable/primary_btn.xml" value="0.36666666666666664" />
+        <entry key="..\:/java/project/android/MediaPlayer2/app/src/main/res/layout-v28/activity_login2.xml" value="0.35052083333333334" />
+        <entry key="..\:/java/project/android/MediaPlayer2/app/src/main/res/layout/activity_login.xml" value="0.1" />
+        <entry key="..\:/java/project/android/MediaPlayer2/app/src/main/res/layout/activity_login2.xml" value="0.5" />
+        <entry key="..\:/java/project/android/MediaPlayer2/app/src/main/res/xml/activity_login2_scene.xml" value="0.35052083333333334" />
+      </map>
+    </option>
+  </component>
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK" />
+</project>

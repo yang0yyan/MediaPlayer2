@@ -126,6 +126,4 @@ void VideoChannel::yuv420sp_to_rgb32(uint8_t *yuvbuffer, uint8_t *rgb_data[4], i
     sws_scale(sws_ctx, yuv_data,
               yuv_linesize, 0, height,
               rgb_data, rgb_linesize);
-
-
 }
