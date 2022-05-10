@@ -25,10 +25,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MediaPlayer">
-        <activity
-            android:name=".activity.Login2Activity"
-            android:exported="false" />
-        <activity android:name=".TestActivity"></activity>
+        <activity android:name=".TestActivity" />
         <activity
             android:name=".activity.SignUpActivity"
             android:theme="@style/Theme.MediaPlayer.NoActionBar.LightFullScreen" />
