@@ -31,7 +31,7 @@
             android:theme="@style/Theme.MediaPlayer.NoActionBar.LightFullScreen" />
         <activity
             android:name=".activity.LoginActivity"
-            android:theme="@style/Theme.MediaPlayer.NoActionBar.LightFullScreen">
+            android:theme="@style/Theme.MediaPlayer.NoActionBar.DarkFullScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
