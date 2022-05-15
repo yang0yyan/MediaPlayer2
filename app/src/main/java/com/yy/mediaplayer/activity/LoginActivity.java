@@ -139,6 +139,10 @@ public class LoginActivity extends BaseNetActivity<LoginPresenter> implements Vi
             ToastUtil.showToast("用户名或密码不能为空");
             return;
         }
+        if(!agreementChecked){
+            ToastUtil.showToast("请勾选许可协议");
+            return;
+        }
         mRoomPresenter.toLogin(username, password);
         SharedPreferences sp = getSharedPreferences("mp.sp", MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();

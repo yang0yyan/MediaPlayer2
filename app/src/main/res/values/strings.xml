@@ -27,5 +27,5 @@
     <string name="phone">电话</string>
     <string name="placeholder">请输入...</string>
     <string name="login_btn">登录</string>
-    <string name="login_agreement_tip">已阅读并同意《融媒体软件服务许可协议》</string>
+    <string name="login_agreement_tip">已阅读并同意《软件服务许可协议》</string>
 </resources>
